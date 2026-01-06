@@ -1,0 +1,10 @@
+# Test Files
+tests/
+tests_libft
+
+# Compiled Files
+*.a
+*.o
+*.out
+
+main.c
