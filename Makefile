@@ -14,12 +14,12 @@ LIBFT_DIR= lib/libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
-INCLUDES = -I$(INC_DIR) -I$(LIBFT_DIR)/include
-LIBS = $(LIBFT)
+CFLAGS = -Wall -Wextra -Werror -g
+INCLUDES = -I$(INC_DIR) -I$(LIBFT_DIR)/inc
+LIBS = $(LIBFT) -lreadline
 
-SRC =
-HEADER =
+SRC = src/main.c
+HEADER = inc/minishell.h
 
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
