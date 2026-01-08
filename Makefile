@@ -18,7 +18,12 @@ CFLAGS = -Wall -Wextra -Werror -g
 INCLUDES = -I$(INC_DIR) -I$(LIBFT_DIR)/inc
 LIBS = $(LIBFT) -lreadline
 
-SRC = src/main.c
+SRC = $(addprefix src/, main.c \
+						executor/exec_utils.c \
+						executor/execute_cmd.c \
+						executor/executor.c \
+						executor/pipes.c \
+						)
 HEADER = inc/minishell.h
 
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
