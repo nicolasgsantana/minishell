@@ -40,6 +40,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADER) | $(OBJ_DIR)
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)/executor
 	@printf "$(GREEN)dir $(OBJ_DIR)/ created $(RESET)\n"
 
 $(LIBFT):
