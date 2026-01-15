@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:01:31 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/01/21 17:05:07 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/01/21 17:05:17 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <sys/wait.h>
 # include <stdlib.h>
 # include <stdio.h>
-# include <stdlib.h>
 # include "libft.h"
 # include "lexer.h"
 
