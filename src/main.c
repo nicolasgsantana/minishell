@@ -6,13 +6,13 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 10:59:11 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/01/15 16:08:08 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/01/20 14:20:03 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*token_name(t_token_type type);
+char	*token_name(t_tk_type type);
 
 int	main(void)
 {
@@ -33,9 +33,10 @@ int	main(void)
 			token = lexer_next(&lexer);
 			while (token->type)
 			{
-				ft_printf("(%s)\n", token_name(token->type));
+				ft_printf("%s: (%s)\n", token->text, token_name(token->type));
 				token = lexer_next(&lexer);
 			}
+			ft_printf("(%s)\n", token_name(token->type));
 		}
 		free(line);
 	}
@@ -45,7 +46,7 @@ int	main(void)
 
 
 // !!!DEBUG ONLY REMOVE LATER
-char	*token_name(t_token_type type)
+char	*token_name(t_tk_type type)
 {
 	switch (type)
 	{
@@ -55,14 +56,6 @@ char	*token_name(t_token_type type)
 			return "word";
 		case TK_OPERATOR:
 			return "operator";
-		case TK_REDIR_OP:
-			return "redir operator";
-		case TK_VAR:
-			return "var";
-		case TK_S_QUOTE:
-			return "single quote";
-		case TK_D_QUOTE:
-			return "double quote";
 		default:
 			return NULL;
 	}
