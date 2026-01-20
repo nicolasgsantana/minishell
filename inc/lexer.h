@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 10:47:26 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/01/20 14:15:00 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/01/20 15:30:44 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ typedef struct s_token
 typedef struct s_lexer
 {
 	char		*line;
-	size_t			cursor;
-	size_t			line_len;
-	t_lx_state		state;
-}					t_lexer;
+	size_t		cursor;
+	size_t		line_len;
+	t_lx_state	state;
+}				t_lexer;
 
 t_lexer	lexer_new(char *line);
 t_token	*lexer_next(t_lexer *lexer);

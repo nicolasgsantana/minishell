@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 10:04:33 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/01/20 15:05:19 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/01/20 15:31:58 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,7 @@ t_token	*lexer_next(t_lexer *lexer)
 	else if (lexer->line[lexer->cursor] == '"')
 		lexer->state = LX_QUOTE;
 	if (lexer->state == LX_QUOTE)
-		return(handle_quote(lexer));
+		return (handle_quote(lexer));
 	else
-	{
 		return (new_token(TK_EOF, 0, 0, EXP_NONE));
-	}
-	return NULL;
 }
