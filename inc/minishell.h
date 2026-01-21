@@ -6,7 +6,7 @@
 /*   By: keila <keila@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:01:31 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/01/08 05:51:43 by keila            ###   ########.fr       */
+/*   Updated: 2026/01/21 12:31:17 by keila            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <stdio.h>
 # include "libft.h"
 
 typedef struct s_cmd
@@ -36,7 +35,7 @@ typedef struct s_shell
 	int		cmd_count;
 	char	**envp;
 	int		last_status;
-} t_shell;
+}	t_shell;
 
 void	child_process(int i, t_shell *sh, int *pipes);
 int		wait_for_children(void);

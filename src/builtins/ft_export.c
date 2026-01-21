@@ -1,0 +1,102 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_export.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: keila <keila@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/16 10:30:06 by kqueiroz          #+#    #+#             */
+/*   Updated: 2026/01/20 09:26:09 by keila            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
+
+char	*make_env_var(char *key, char *value)
+{
+	char	*tmp;
+	char	*res;
+
+	tmp = ft_strjoin(key, "=");
+	res = ft_strjoin(tmp, value);
+	free(tmp);
+	return (res);
+}
+
+int	update_env(char ***envp, char *key, char *value)
+{
+	int		i;
+	char	*new_var;
+
+	i = find_env_index(*envp, key);
+	if (i == -1)
+		return (0);
+	new_var = make_env_var(key, value);
+	free((*envp)[i]);
+	(*envp)[i] = new_var;
+	return (1);
+}
+
+int	add_env(char ***envp, char *key, char *value)
+{
+	int		len;
+	char	**new_env;
+	int		i;
+
+	len = env_len(*envp);
+	new_env = malloc(sizeof(char *) * (len + 2));
+	if (!new_env)
+		return (1);
+	i = 0;
+	while (i < len)
+	{
+		new_env[i] = (*envp)[i];
+		i++;
+	}
+	new_env[i] = make_env_var(key, value);
+	new_env[i + 1] = NULL;
+	free(*envp);
+	*envp = new_env;
+	return (0);
+}
+
+int	handle_export_arg(t_shell *sh, char *arg)
+{
+	char	*equal;
+	char	*key;
+	char	*value;
+
+	if (!is_valid_identifier(arg))
+	{
+		printf("export: %s: not a valid identifier\n", arg);
+		return (1);
+	}
+	equal = ft_strchr(arg, '=');
+	if (equal)
+	{
+		key = ft_substr(arg, 0, equal - arg);
+		value = equal + 1;
+		if (!update_env(&sh->envp, key, value))
+			add_env(&sh->envp, key, value);
+		free(key);
+	}
+	else
+		add_env(&sh->envp, arg, "");
+	return (0);
+}
+
+int	ft_export(t_shell *sh, t_cmd *cmd)
+{
+	int	i;
+
+	if (!cmd->argv[1])
+		return (print_env(sh->envp));
+	i = 1;
+	while (cmd->argv[i])
+	{
+		if (handle_export_arg(sh, cmd->argv[i]))
+			return (1);
+		i++;
+	}
+	return (0);
+}
