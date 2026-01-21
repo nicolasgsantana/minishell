@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 10:59:11 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/01/20 14:20:03 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/01/21 12:34:22 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,16 @@ char	*token_name(t_tk_type type)
 			return "end of file";
 		case TK_WORD:
 			return "word";
-		case TK_OPERATOR:
-			return "operator";
+		case TK_PIPE:
+			return "pipe";
+		case TK_RD_OUT:
+			return "rd out";
+		case TK_RD_IN:
+			return "rd in";
+		case TK_AP_OUT:
+			return "ap out";
+		case TK_HEREDOC:
+			return "heredoc";
 		default:
 			return NULL;
 	}

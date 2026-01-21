@@ -14,6 +14,8 @@ LIBFT_DIR= lib/libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 CC = gcc
+### REMOVE -g flag before sending project
+### -g flag for DEBUG ONLY
 CFLAGS = -Wall -Wextra -Werror -g
 INCLUDES = -I$(INC_DIR) -I$(LIBFT_DIR)/inc
 LIBS = $(LIBFT) -lreadline
@@ -24,7 +26,10 @@ SRC = $(addprefix src/, main.c \
 						executor/executor.c \
 						executor/pipes.c \
 						lexer/lexer.c \
+						lexer/token.c \
 						lexer/ft_isspace.c \
+						lexer/handle_quote.c \
+						lexer/handle_operator.c \
 						)
 HEADER = inc/minishell.h
 
