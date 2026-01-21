@@ -14,6 +14,8 @@ LIBFT_DIR= lib/libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 CC = gcc
+### REMOVE -g flag before sending project
+### -g flag for DEBUG ONLY
 CFLAGS = -Wall -Wextra -Werror -g
 INCLUDES = -I$(INC_DIR) -I$(LIBFT_DIR)/inc
 LIBS = $(LIBFT) -lreadline
@@ -23,6 +25,12 @@ SRC = $(addprefix src/, main.c \
 						executor/execute_cmd.c \
 						executor/executor.c \
 						executor/pipes.c \
+						lexer/lexer.c \
+						lexer/token.c \
+						lexer/ft_isspace.c \
+						lexer/handle_quote.c \
+						lexer/handle_operator.c \
+						lexer/handle_word.c \
 						)
 HEADER = inc/minishell.h
 
@@ -41,6 +49,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADER) | $(OBJ_DIR)
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 	@mkdir -p $(OBJ_DIR)/executor
+	@mkdir -p $(OBJ_DIR)/lexer
 	@printf "$(GREEN)dir $(OBJ_DIR)/ created $(RESET)\n"
 
 $(LIBFT):
