@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 10:04:33 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/01/21 14:08:54 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/01/21 16:20:44 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,5 @@ t_token	*lexer_next(t_lexer *lexer)
 		return (handle_operator(lexer));
 	if (lexer->line[lexer->cursor])
 		return (handle_word(lexer));
-	return (new_token(TK_EOF, 0, 0, EXP_NONE));
+	return (new_token(TK_EOF, NULL, 0, EXP_NONE));
 }

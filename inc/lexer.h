@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 10:47:26 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/01/21 14:09:20 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/01/21 16:19:23 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,7 @@ int		starts_with_operator(char c);
 t_token	*handle_operator(t_lexer *lexer);
 t_token	*handle_quote(t_lexer *lexer);
 t_token	*handle_word(t_lexer *lexer);
+t_list	*tokenize(char *line);
+void	free_token_lst(t_list *token_lst);
 
 #endif
