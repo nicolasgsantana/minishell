@@ -30,6 +30,7 @@ SRC = $(addprefix src/, main.c \
 						lexer/ft_isspace.c \
 						lexer/handle_quote.c \
 						lexer/handle_operator.c \
+						lexer/handle_word.c \
 						)
 HEADER = inc/minishell.h
 
