@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keila <keila@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 19:18:45 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/01/15 14:06:35 by keila            ###   ########.fr       */
+/*   Updated: 2026/01/27 19:45:56 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_echo(t_cmd *cmd)
 
 	i = 1;
 	newline = 1;
-	if (cmd->argv[1] && !ft_strcmp(cmd->argv[1], "-n"))
+	if (cmd->argv[1] && !ft_strncmp(cmd->argv[1], "-n", 2))
 	{
 		newline = 0;
 		i++;

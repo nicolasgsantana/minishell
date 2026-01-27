@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keila <keila@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 10:30:06 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/01/17 13:13:14 by keila            ###   ########.fr       */
+/*   Updated: 2026/01/27 19:46:11 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,18 @@ void	print_env(char **envp)
 		printf("%s\n", envp[i]);
 		i++;
 	}
+}
+
+int	update_env(char **envp, char *key, char *value)
+{
+	int		i;
+	char	*new_var;
+
+	i = find_env_index(envp, key);
+	if (i == -1)
+		return (0);
+	new_var = make_env_var(key, value);
+	free(envp[i]);
+	envp[i] = new_var;
+	return (1);
 }

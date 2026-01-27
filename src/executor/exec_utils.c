@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keila <keila@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/14 19:18:45 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/01/08 05:34:22 by keila            ###   ########.fr       */
+/*   Created: 2026/11/14 19:37:55 by kqueiroz          #+#    #+#             */
+/*   Updated: 2026/01/27 19:43:22 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	child_process(int i, t_shell *sh, int *pipes)
 		setup_pipes(i, sh->cmd_count, pipes);
 		close_all_pipes(pipes, sh->cmd_count);
 	}
+	if (sh->cmds[i].is_builtin)
+		exit(execute_builtin(sh, &sh->cmds[i]));
 	execute_cmd(&sh->cmds[i], sh);
 }
 
