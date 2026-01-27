@@ -6,7 +6,7 @@
 /*   By: keila <keila@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 10:30:06 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/01/21 12:20:50 by keila            ###   ########.fr       */
+/*   Updated: 2026/01/27 18:10:19 by keila            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_cd(t_shell *sh, t_cmd *cmd)
 		return (1);
 	}
 	if (getcwd(cwd, sizeof(cwd)))
-		update_env(&sh->envp, "PWD", cwd);
+		update_env(sh->envp, "PWD", cwd);
 	return (0);
 }
 
