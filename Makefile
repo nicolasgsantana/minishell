@@ -31,6 +31,8 @@ SRC = $(addprefix src/, main.c \
 						lexer/handle_quote.c \
 						lexer/handle_operator.c \
 						lexer/handle_word.c \
+						parser/parser.c \
+						parser/check_quotes.c \
 						)
 HEADER = inc/minishell.h
 
@@ -50,6 +52,7 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 	@mkdir -p $(OBJ_DIR)/executor
 	@mkdir -p $(OBJ_DIR)/lexer
+	@mkdir -p $(OBJ_DIR)/parser
 	@printf "$(GREEN)dir $(OBJ_DIR)/ created $(RESET)\n"
 
 $(LIBFT):

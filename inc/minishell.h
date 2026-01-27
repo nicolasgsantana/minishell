@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:01:31 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/01/28 18:13:07 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/01/27 14:12:27 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <fcntl.h>
 # include "libft.h"
 # include "lexer.h"
+# include "parser.h"
 
 typedef struct s_cmd
 {
