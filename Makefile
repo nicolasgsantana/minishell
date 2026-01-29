@@ -25,6 +25,7 @@ SRC = $(addprefix src/, main.c \
 						executor/execute_cmd.c \
 						executor/executor.c \
 						executor/pipes.c \
+						executor/redir.c \
 						lexer/lexer.c \
 						lexer/token.c \
 						lexer/ft_isspace.c \
