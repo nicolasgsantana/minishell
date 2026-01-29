@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 19:18:45 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/01/27 19:44:57 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/01/29 12:14:56 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,34 @@ int	execute_builtin(t_shell *sh, t_cmd *cmd)
 	return (1);
 }
 
+int	builtin_redir(t_shell *sh, t_cmd *cmd)
+{
+	int	save_stdin;
+	int	save_stdout;
+	int	status;
+
+	save_stdin = dup(STDIN_FILENO);
+	save_stdout = dup(STDOUT_FILENO);
+	if (apply_redir(cmd))
+	{
+		dup2(save_stdin, STDIN_FILENO);
+		dup2(save_stdout, STDOUT_FILENO);
+		close(save_stdin);
+		close(save_stdout);
+		return (1);
+	}
+	status = execute_builtin(sh, cmd);
+	dup2(save_stdin, STDIN_FILENO);
+	dup2(save_stdout, STDOUT_FILENO);
+	close(save_stdin);
+	close(save_stdout);
+	return (status);
+}
+
 void	executor(t_shell *sh)
 {
 	if (sh->cmd_count == 1 && sh->cmds[0].is_builtin)
-		sh->last_status = execute_builtin(sh, &sh->cmds[0]);
+		sh->last_status = builtin_redir(sh, &sh->cmds[0]);
 	else
 		sh->last_status = execute_pipeline(sh);
 }

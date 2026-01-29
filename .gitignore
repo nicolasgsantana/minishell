@@ -1,3 +1,4 @@
 *.o
 minishell
 test_exec.c
+test_redirect.c

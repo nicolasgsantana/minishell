@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:01:31 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/01/27 19:28:17 by keila            ###   ########.fr       */
+/*   Updated: 2026/01/28 18:13:07 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,16 @@
 # include <sys/wait.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <fcntl.h>
 # include "libft.h"
 # include "lexer.h"
 
 typedef struct s_cmd
 {
 	char	**argv;
+	char	*input_file;
+	char	*output_file;
+	int		append_output;
 	int		is_builtin;
 }	t_cmd;
 
@@ -59,5 +63,7 @@ int		is_valid_identifier(char *str);
 int		update_env(char **envp, char *key, char *value);
 char	*make_env_var(char *key, char *value);
 int		execute_builtin(t_shell *sh, t_cmd *cmd);
+
+int		apply_redir(t_cmd *cmd);
 
 #endif
