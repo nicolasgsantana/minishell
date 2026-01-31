@@ -26,6 +26,14 @@ SRC = $(addprefix src/, main.c \
 						executor/executor.c \
 						executor/pipes.c \
 						executor/redir.c \
+						builtins/builtins_utils.c \
+						builtins/ft_cd.c \
+						builtins/ft_echo.c \
+						builtins/ft_env.c \
+						builtins/ft_exit.c \
+						builtins/ft_export.c \
+						builtins/ft_pwd.c \
+						builtins/ft_unset.c \
 						lexer/lexer.c \
 						lexer/token.c \
 						lexer/ft_isspace.c \
@@ -50,6 +58,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADER) | $(OBJ_DIR)
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 	@mkdir -p $(OBJ_DIR)/executor
+	@mkdir -p $(OBJ_DIR)/builtins
 	@mkdir -p $(OBJ_DIR)/lexer
 	@printf "$(GREEN)dir $(OBJ_DIR)/ created $(RESET)\n"
 
