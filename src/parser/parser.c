@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 10:14:53 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/01/27 14:14:17 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/01/29 15:35:55 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,49 @@
 char	*token_name(t_tk_type type);
 void	print_tokens(t_list *tokens);
 
-void	parse(char *line)
+void	init_cmds(t_cmd *cmds, t_shell *sh, t_list *tokens)
+{
+	t_token	*token;
+	int		count;
+	int		args;
+
+	count = 1;
+	args = 0;
+	while (tokens)
+	{
+		token = tokens->content;
+		if (token->type == TK_PIPE)
+			count++;
+		else if (token->type == TK_WORD)
+			args++;
+		tokens = tokens->next;
+	}
+	cmds = malloc(sizeof(t_cmd) * count);
+	if (!cmds)
+		return (NULL);
+	sh->cmd_count = count;
+}
+
+void	parse(char *line, t_shell *sh)
 {
 	t_list	*tokens;
+	t_token	*token;
+	t_cmd	*cmds;
+	int		cmd_index;
 
 	tokens = tokenize(line);
+	cmd_index = 0;
 	if (check_quotes(tokens))
 		return (free_token_lst(tokens));
+	init_cmds(cmds, sh, tokens);
+	while (tokens)
+	{
+		token = tokens->content;
+		if (token->type == TK_WORD)
+		{
+			cmds[cmd_index]
+		}
+	}
 	print_tokens(tokens);
 }
 
