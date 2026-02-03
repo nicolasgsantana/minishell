@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 10:14:53 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/01/29 15:35:55 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/03 11:01:27 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,48 +15,59 @@
 char	*token_name(t_tk_type type);
 void	print_tokens(t_list *tokens);
 
-void	init_cmds(t_cmd *cmds, t_shell *sh, t_list *tokens)
+int	get_argc(char **argv)
 {
-	t_token	*token;
-	int		count;
-	int		args;
+	int	argc;
 
-	count = 1;
-	args = 0;
-	while (tokens)
-	{
-		token = tokens->content;
-		if (token->type == TK_PIPE)
-			count++;
-		else if (token->type == TK_WORD)
-			args++;
-		tokens = tokens->next;
-	}
-	cmds = malloc(sizeof(t_cmd) * count);
-	if (!cmds)
+	argc = 0;
+	while (argv[argc])
+		argc++;
+	return (argc);
+}
+
+void	free_argv(char **argv)
+{
+	int	i;
+
+	i = 0;
+	while (argv[i])
+		free(argv[i++]);
+	free(argv);
+}
+
+void	append_arg(t_cmd *cmd, char *new_arg)
+{
+	char	**temp;
+	int		i;
+	int		argc;
+
+	i = 0;
+	argc = get_argc(cmd->argv);
+	temp = malloc((argc + 1) * sizeof(char *));
+	if (!temp)
 		return (NULL);
-	sh->cmd_count = count;
+	while (i < argc)
+	{
+		temp[i] = ft_strdup(cmd->argv[i]);
+		i++;
+	}
+	temp[i++] = ft_strdup(new_arg);
+	temp[i] = NULL;
+	free_argv(cmd->argv);
+	cmd->argv = temp;
 }
 
 void	parse(char *line, t_shell *sh)
 {
 	t_list	*tokens;
 	t_token	*token;
-	t_cmd	*cmds;
-	int		cmd_index;
 
 	tokens = tokenize(line);
-	cmd_index = 0;
 	if (check_quotes(tokens))
 		return (free_token_lst(tokens));
-	init_cmds(cmds, sh, tokens);
 	while (tokens)
 	{
 		token = tokens->content;
-		if (token->type == TK_WORD)
-		{
-			cmds[cmd_index]
-		}
 	}
 	print_tokens(tokens);
 }
