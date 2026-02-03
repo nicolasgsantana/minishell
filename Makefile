@@ -26,6 +26,7 @@ SRC = $(addprefix src/, main.c \
 						executor/executor.c \
 						executor/pipes.c \
 						executor/redir.c \
+						executor/heredoc.c \
 						builtins/builtins_utils.c \
 						builtins/ft_cd.c \
 						builtins/ft_echo.c \
