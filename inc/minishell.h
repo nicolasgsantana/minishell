@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:01:31 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/01/28 18:13:07 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/03 13:04:10 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ typedef struct s_cmd
 	char	*output_file;
 	int		append_output;
 	int		is_builtin;
+	char	*hd_delim;
+	int		hd_expand;
+	int		hd_count;
 }	t_cmd;
 
 typedef struct s_shell
@@ -40,6 +43,8 @@ typedef struct s_shell
 	char	**envp;
 	int		last_status;
 }	t_shell;
+
+int		prepare_heredocs(t_cmd *cmd);
 
 void	child_process(int i, t_shell *sh, int *pipes);
 int		wait_for_children(void);
