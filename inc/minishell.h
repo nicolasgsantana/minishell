@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:01:31 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/01/29 14:35:22 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/04 11:35:43 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # include <fcntl.h>
 # include "libft.h"
 # include "lexer.h"
-# include "parser.h"
 
 typedef struct s_cmd
 {
@@ -41,6 +40,8 @@ typedef struct s_shell
 	char	**envp;
 	int		last_status;
 }	t_shell;
+
+# include "parser.h"
 
 void	child_process(int i, t_shell *sh, int *pipes);
 int		wait_for_children(void);

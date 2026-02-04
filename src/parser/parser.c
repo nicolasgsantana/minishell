@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 10:14:53 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/03 11:01:27 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/04 11:56:13 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	append_arg(t_cmd *cmd, char *new_arg)
 	argc = get_argc(cmd->argv);
 	temp = malloc((argc + 1) * sizeof(char *));
 	if (!temp)
-		return (NULL);
+		return ;
 	while (i < argc)
 	{
 		temp[i] = ft_strdup(cmd->argv[i]);
@@ -68,8 +68,46 @@ void	parse(char *line, t_shell *sh)
 	while (tokens)
 	{
 		token = tokens->content;
+		if (token->type == TK_WORD)
+		{
+			expand(token, sh);
+		}
+		if (token->type == TK_AP_OUT)
+		{
+			// CHECK IF HAS A TK_WORD AFTER
+			// CHECK AND EXPAND VAR(S)
+			// CHECK IF A FILE WITH THE TK_WORD PATH ALREADY EXIST
+			// CREATE FILE IF NOT
+			// SET OUTPUT TO FILE
+			// SET APPEND FLAG TO 1
+		}
+		if (token->type == TK_RD_OUT)
+		{
+			// CHECK IF HAS A TK_WORD AFTER
+			// CHECK AND EXPAND VAR(S)
+			// CREATE NEW FILE
+			// SET OUTPUT TO FILE
+			// SET APPEND FLAG TO 0
+		}
+		if (token->type == TK_RD_IN)
+		{
+			// CHECK IF HAS A TK_WORD AFTER
+			// CHECK AND EXPAND VAR(S)
+			// CHECK IF FILE EXISTS RETURN ERROR IF NOT
+			// SET INPUT TO FILE
+		}
+		if (token->type == TK_HEREDOC)
+		{
+			// TO BE DISCUSSED
+		}
+		if (token->type == TK_PIPE)
+		{
+			// CHECK IF HAS A TK_WORD AFTER
+			// ADD CURRENT COMMAND TO SHELL CMD LIST
+			// INIT NEW COMMAND
+		}
+		tokens = tokens->next;
 	}
-	print_tokens(tokens);
 }
 
 // !!!DEBUG ONLY REMOVE LATER
