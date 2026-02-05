@@ -6,11 +6,27 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 19:18:45 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/01/27 19:45:56 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/05 14:10:16 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	is_flag(char *str)
+{
+	int	i;
+
+	if (str[0] != '-')
+		return (0);
+	i = 1;
+	while (str[i])
+	{
+		if (str[i] != 'n')
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 int	ft_echo(t_cmd *cmd)
 {
@@ -19,7 +35,7 @@ int	ft_echo(t_cmd *cmd)
 
 	i = 1;
 	newline = 1;
-	if (cmd->argv[1] && !ft_strncmp(cmd->argv[1], "-n", 2))
+	while (cmd->argv[i] && is_flag(cmd->argv[i]))
 	{
 		newline = 0;
 		i++;
