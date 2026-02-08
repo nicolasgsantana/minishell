@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 10:59:11 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/04 14:36:00 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/05 14:40:15 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(void)
 	t_shell	*sh;
 
 	sh = malloc(sizeof(t_shell));
-	char	*envp_test[] = {"ELPHELT=VALENTINE", "JONNHY=SILVERHAND", "NAME=NOT FOUND", NULL};
+	char	*envp_test[] = {"ELPHELT=VALENTINE", "JON=NHY", "JONNHY=SILVERHAND", "NAME=NOT FOUND", NULL};
 	sh->envp = envp_test;
 	sh->last_status = 2077;
 	line = "";
