@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 15:51:08 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/09 12:02:56 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/09 14:01:09 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*get_var_name(char *text)
 	i = 0;
 	if (text[i] == '$')
 		i++;
+	if (text[i] == '?')
+		return (ft_strdup("?"));
 	while (text[i])
 	{
 		if (!valid_name_char(text[i]))
@@ -28,7 +30,13 @@ char	*get_var_name(char *text)
 	return (ft_substr(text, 1, i - 1));
 }
 
-char	*get_var(char *text, char **envp)
+char	*get_last_status(char *var_name, int last_status)
+{
+	free(var_name);
+	return (ft_strdup(ft_itoa(last_status)));
+}
+
+char	*get_var(char *text, t_shell *sh)
 {
 	char	*var_name;
 	int		i;
@@ -36,17 +44,19 @@ char	*get_var(char *text, char **envp)
 
 	i = 0;
 	var_name = get_var_name(text);
-	while(envp[i])
+	if (var_name[0] == '?')
+		return (get_last_status(var_name, sh->last_status));
+	while(sh->envp[i])
 	{
 		j = 0;
-		while(envp[i][j] != '=')
+		while(sh->envp[i][j] != '=')
 			j++;
 		if (j < ft_strlen(var_name))
 			j = ft_strlen(var_name);
-		if (!ft_strncmp(var_name, envp[i], j++))
+		if (!ft_strncmp(var_name, sh->envp[i], j++))
 		{
 			free(var_name);
-			return (ft_substr(envp[i], j, ft_strlen(envp[i]) - j));
+			return (ft_substr(sh->envp[i], j, ft_strlen(sh->envp[i]) - j));
 		}
 		i++;
 	}

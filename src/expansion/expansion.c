@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 15:15:46 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/09 13:07:54 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/09 14:02:30 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,14 @@ char	*expand_var_in_string(char *str, t_shell *sh)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '$' && valid_var_start(&str[i]))
+		if (str[i] == '$' && (valid_var_start(&str[i]) || is_status(&str[i])))
 		{
 			var_name = get_var_name(&str[i]);
-			var_value = get_var(&str[i], sh->envp);
+			var_value = get_var(&str[i], sh);
 			if (var_value)
 				result = join_var(var_value, result);
-			free(var_value);
 			i += ft_strlen(var_name) + 1;
+			free(var_value);
 			free(var_name);
 		}
 		else
