@@ -6,13 +6,13 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 15:51:08 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/09 11:17:15 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/09 12:02:56 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static char	*get_var_name(char *text)
+char	*get_var_name(char *text)
 {
 	int	i;
 

@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 10:14:53 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/04 11:56:13 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/09 12:00:26 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	parse(char *line, t_shell *sh)
 		token = tokens->content;
 		if (token->type == TK_WORD)
 		{
-			expand(token, sh);
+			ft_printf("%s\n", expand(token, sh));
 		}
 		if (token->type == TK_AP_OUT)
 		{
