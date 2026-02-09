@@ -6,11 +6,12 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 02:12:19 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/09 09:11:43 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/09 09:17:14 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+char	*get_var(char *text, t_shell *sh);
 
 char	*expand_var(char *line, t_shell *sh, int *i)
 {
@@ -19,10 +20,11 @@ char	*expand_var(char *line, t_shell *sh, int *i)
 	char	*value;
 
 	start = *i;
+	//tratar-> $?
 	while (ft_isalnum(line[*i]) || line[*i] == '_')
 		(*i)++;
 	var = ft_substr(line, start, *i - start);
-	value = get_env(var, sh->envp);
+	value = get_var(var, sh);
 	free(var);
 	if (!value)
 		return (ft_strdup(""));
@@ -42,8 +44,8 @@ char	*expand_line(char *line, t_shell *sh)
 	{
 		if (line[i] == '$')
 		{
-			i++;
 			tmp = expand_var(line, sh, &i);
+			i++;
 		}
 		else
 		{
@@ -57,17 +59,18 @@ char	*expand_line(char *line, t_shell *sh)
 	return (result);
 }
 
-int	read_hd_lines(t_cmd *cmd, int fd, t_shell *sh)
+int	read_hd_lines(t_cmd *cmd, int fd, t_shell *sh, int *i)
 {
 	char	*line;
 	char	*expanded;
 
-	while(1)
+	while (1)
 	{
 		line = readline("> ");
 		if (!line)
 			break ;
-		if (ft_strncmp(line, cmd->hd_delim, ft_strlen(cmd->hd_delim) + 1) == 0)
+		if (ft_strncmp(line, cmd->hd_delim[*i],
+				ft_strlen(cmd->hd_delim[*i]) + 1) == 0)
 		{
 			free(line);
 			break ;
@@ -96,34 +99,42 @@ char	*hd_filename(int i)
 	return (tmp);
 }
 
-int	handle_hd(t_cmd *cmd, int i, t_shell *sh)
-{
-	int		fd;
-	char	*filename;
-
-	filename = hd_filename(i);
-	fd = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	if (fd < 0)
-		return (1);
-	read_hd_lines(cmd, fd, sh);
-	close(fd);
-	cmd->input_file = filename;
-	return (0);
-}
-
 int	prepare_heredocs(t_cmd *cmd, t_shell *sh)
 {
-	int	i;
+	int		i;
+	int		fd;
+	char	*filename;
 
 	i = 0;
 	while (i < cmd->hd_count)
 	{
-		if (handle_hd(cmd, i, sh))
+		filename = hd_filename(i);
+		fd = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		if (fd < 0)
 			return (1);
+		read_hd_lines(cmd, fd, sh, &i);
+		close(fd);
+		cmd->input_file = filename;
 		i++;
 	}
 	return (0);
 }
 
+void	cleanup_hd(t_cmd *cmd)
+{
+	int	i;
+	int	num;
+
+	i = 0;
+	while (i < cmd->hd_count)
+	{
+		num = ft_itoa(i);
+		tmp = ft_strjoin("/tmp/.heredoc_", num);
+		free(num);
+		unlink(filename);
+		free(filename);
+		i++;
+	}
+}
+
 // call in main/expand?
-// implement cleanup
