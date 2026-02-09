@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 15:15:46 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/05 15:08:05 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/09 10:33:01 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,6 @@
 char	*strip_quotes(char *text)
 {
 	return(ft_substr(text, 1, ft_strlen(text) - 2));
-}
-
-int	valid_var_start(char *text)
-{
-	return (*text == '$' && (ft_isalpha(*(text + 1)) || *(text + 1) == '_'));
-}
-
-int	valid_name_char(char c)
-{
-	return (ft_isalpha(c) ||  ft_isalnum(c) || c == '_');
 }
 
 char	*substitute_string(char *origin, char *from, char *to)
