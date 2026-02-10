@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 10:14:53 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/10 10:32:28 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/10 14:50:27 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,37 @@ int	next_is_word(t_list *tokens)
 
 	next_token = (tokens->next)->content;
 	return (next_token->type == TK_WORD);
+}
+
+int	redir_out_check(char *file, int append)
+{
+	int	fd;
+
+	if (append)
+		fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	else
+		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (fd < 0)
+	{
+		perror(fd);
+		return (1);
+	}
+	close(fd);
+	return (0);
+}
+
+int	redir_in_check(char *file)
+{
+	int	fd;
+
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
+	{
+		perror(fd);
+		return (1);
+	}
+	close(fd);
+	return (0);
 }
 
 void	parse(char *line, t_shell *sh)
