@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 10:14:53 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/09 12:00:26 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/10 10:32:28 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,15 @@ void	append_arg(t_cmd *cmd, char *new_arg)
 	temp[i] = NULL;
 	free_argv(cmd->argv);
 	cmd->argv = temp;
+}
+
+//TODO: CHECK HOW TO HANDLE CASE WHEN WORD IS EMPTY
+int	next_is_word(t_list *tokens)
+{
+	t_token	*next_token;
+
+	next_token = (tokens->next)->content;
+	return (next_token->type == TK_WORD);
 }
 
 void	parse(char *line, t_shell *sh)
