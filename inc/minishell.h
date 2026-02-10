@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:01:31 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/09 15:45:56 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/10 12:45:16 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_cmd
 	char	*output_file;
 	int		append_output;
 	int		is_builtin;
-	char	*hd_delim;
+	char	**hd_delim;
 	int		hd_expand;
 	int		hd_count;
 }	t_cmd;
@@ -46,7 +46,7 @@ typedef struct s_shell
 
 # include "parser.h"
 
-int		prepare_heredocs(t_cmd *cmd);
+int		prepare_heredocs(t_cmd *cmd, t_shell *sh);
 
 void	child_process(int i, t_shell *sh, int *pipes);
 int		wait_for_children(void);

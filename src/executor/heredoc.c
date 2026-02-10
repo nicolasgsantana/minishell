@@ -6,12 +6,11 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 02:12:19 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/09 09:17:14 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/10 14:33:10 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-char	*get_var(char *text, t_shell *sh);
 
 char	*expand_var(char *line, t_shell *sh, int *i)
 {
@@ -20,8 +19,7 @@ char	*expand_var(char *line, t_shell *sh, int *i)
 	char	*value;
 
 	start = *i;
-	//tratar-> $?
-	while (ft_isalnum(line[*i]) || line[*i] == '_')
+	while ((line[*i]) && (ft_isalnum(line[*i]) || line[*i] == '_'))
 		(*i)++;
 	var = ft_substr(line, start, *i - start);
 	value = get_var(var, sh);
@@ -35,26 +33,24 @@ char	*expand_line(char *line, t_shell *sh)
 {
 	int		i;
 	char	*result;
+	char	*new_result;
 	char	*tmp;
-	char	buf[2];
 
 	i = 0;
 	result = ft_strdup("");
 	while (line[i])
 	{
-		if (line[i] == '$')
-		{
+		if (line[i] == '$' && line[i + 1] != '\0' && line[i + 1] != ' ')
 			tmp = expand_var(line, sh, &i);
-			i++;
-		}
 		else
 		{
-			buf[0] = line[i++];
-			buf[1] = '\0';
-			tmp = ft_strdup(buf);
+			tmp = ft_substr(line, i, 1);
+			i++;
 		}
-		result = ft_strjoin(result, tmp);
+		new_result = ft_strjoin(result, tmp);
+		free(result);
 		free(tmp);
+		result = new_result;
 	}
 	return (result);
 }
@@ -119,22 +115,3 @@ int	prepare_heredocs(t_cmd *cmd, t_shell *sh)
 	}
 	return (0);
 }
-
-void	cleanup_hd(t_cmd *cmd)
-{
-	int	i;
-	int	num;
-
-	i = 0;
-	while (i < cmd->hd_count)
-	{
-		num = ft_itoa(i);
-		tmp = ft_strjoin("/tmp/.heredoc_", num);
-		free(num);
-		unlink(filename);
-		free(filename);
-		i++;
-	}
-}
-
-// call in main/expand?
