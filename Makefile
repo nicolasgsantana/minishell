@@ -56,15 +56,12 @@ $(NAME): $(LIBFT) $(OBJ)
 	@printf "\n$(GREEN)$(NAME) created$(RESET)\n"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADER) | $(OBJ_DIR)
+	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 	@printf "\r$(ERASE)$(BLUE) compiled $(notdir $@)$(RESET)"
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
-	@mkdir -p $(OBJ_DIR)/executor
-	@mkdir -p $(OBJ_DIR)/builtins
-	@mkdir -p $(OBJ_DIR)/lexer
-	@mkdir -p $(OBJ_DIR)/parser
 	@printf "$(GREEN)dir $(OBJ_DIR)/ created $(RESET)\n"
 
 $(LIBFT):
