@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 10:30:06 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/05 18:26:37 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/10 17:50:38 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 char	*check_cd_args(t_cmd *cmd, t_shell *sh, int *print_pwd)
 {
+	char	*path;
+
 	if (cmd->argv[2])
 	{
 		ft_putstr_fd("minishell: cd: too many arguments\n", STDERR_FILENO);
@@ -22,11 +24,20 @@ char	*check_cd_args(t_cmd *cmd, t_shell *sh, int *print_pwd)
 	if (cmd->argv[1] && !ft_strncmp(cmd->argv[1], "-", 2))
 	{
 		*print_pwd = 1;
-		return (get_var("$OLDPWD", sh->envp));
+		path = get_var("$OLDPWD", sh);
+		if (!path)
+		{
+			ft_putstr_fd("minishell: cd: OLDPWD not defined\n", STDERR_FILENO);
+			return (NULL);
+		}
+		return (path);
 	}
 	if (!cmd->argv[1] || !ft_strncmp(cmd->argv[1], "--", 3))
-		return (get_var("$HOME", sh->envp));
-	return (cmd->argv[1]);
+	{
+		path = get_var("$HOME", sh);
+		return (path);
+	}
+	return (ft_strdup(cmd->argv[1]));
 }
 
 int	ft_cd(t_shell *sh, t_cmd *cmd)
@@ -45,6 +56,7 @@ int	ft_cd(t_shell *sh, t_cmd *cmd)
 	if (chdir(path) == -1)
 	{
 		perror("cd");
+		free(path);
 		return (1);
 	}
 	if (oldpwd[0])
@@ -55,7 +67,6 @@ int	ft_cd(t_shell *sh, t_cmd *cmd)
 		if (print_pwd)
 			ft_putendl_fd(cwd, STDOUT_FILENO);
 	}
+	free(path);
 	return (0);
 }
-
-//lidar com ~

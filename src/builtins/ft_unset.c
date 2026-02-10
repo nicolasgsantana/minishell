@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 13:26:06 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/01/27 19:45:20 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/10 16:28:09 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ int	remove_env(char ***envp, char *key)
 		return (0);
 	len = env_len(*envp);
 	new_env = malloc(sizeof(char *) * len);
-	if (!new_env)
-		return (1);
 	j = 0;
 	while (j < len)
 	{
