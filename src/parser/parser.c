@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 10:14:53 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/10 14:50:27 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/11 12:38:38 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,56 +97,206 @@ int	redir_in_check(char *file)
 	return (0);
 }
 
-void	parse(char *line, t_shell *sh)
+t_cmd	*new_cmd(void)
+{
+	t_cmd	*new_cmd;
+
+	new_cmd = malloc(sizeof(t_cmd));
+	if (!new_cmd)
+		return (NULL);
+	new_cmd->argv = NULL;
+	new_cmd->input_file = NULL;
+	new_cmd->append_output = 0;
+	new_cmd->is_builtin = 0;
+	new_cmd->hd_delim = NULL;
+	new_cmd->hd_expand = 0;
+	new_cmd->hd_count = 0;
+	return (new_cmd);
+}
+
+void	append_cmd(t_shell *sh, t_cmd *new_cmd)
+{
+	t_cmd	**temp;
+	int		i;
+
+	temp = sh->cmds;
+	sh->cmd_count += 1;
+	sh->cmds = malloc(sizeof(t_cmd *) * sh->cmd_count + 1);
+	if (!sh->cmds)
+		return ;
+	i = 0;
+	while (temp[i])
+	{
+		sh->cmds[i] = temp[i];
+		temp[i] = NULL;
+		i++;
+	}
+	sh->cmds[i++] = new_cmd;
+	sh->cmds[i] = NULL;
+	free(temp);
+}
+
+void	append_hd_delim(t_cmd *cmd, char *new_delim)
+{
+	int		i;
+	char	**temp;
+
+	temp = cmd->hd_delim;
+	cmd->hd_count += 1;
+	cmd->hd_delim = malloc(sizeof(char *) * cmd->hd_count + 1);
+	if (!cmd->hd_delim)
+		return ;
+	i = 0;
+	while (temp[i])
+	{
+		cmd->hd_delim[i] = temp[i];
+		temp[i] = NULL;
+		i++;
+	}
+	cmd->hd_delim[i++] = new_delim;
+	cmd->hd_delim[i] = NULL;
+	free(temp);
+}
+
+int	is_builtin(char *arg)
+{
+	if (!ft_strncmp("echo", arg, 4) && ft_strlen(arg) == 4)
+		return (1);
+	else if (!ft_strncmp("cd", arg, 2) && ft_strlen(arg) == 2)
+		return (1);
+	else if (!ft_strncmp("pwd", arg, 3) && ft_strlen(arg) == 3)
+		return (1);
+	else if (!ft_strncmp("export", arg, 6) && ft_strlen(arg) == 6)
+		return (1);
+	else if (!ft_strncmp("unset", arg, 5) && ft_strlen(arg) == 5)
+		return (1);
+	else if (!ft_strncmp("env", arg, 3) && ft_strlen(arg) == 3)
+		return (1);
+	else if (!ft_strncmp("exit", arg, 4) && ft_strlen(arg) == 4)
+		return (1);
+	else
+		return (0);
+}
+
+int	parse(char *line, t_shell *sh)
 {
 	t_list	*tokens;
 	t_token	*token;
+	t_cmd	*cmd;
 
 	tokens = tokenize(line);
 	if (check_quotes(tokens))
-		return (free_token_lst(tokens));
+	{
+		free_token_lst(tokens);
+		return (1);
+	}
+	cmd = new_cmd();
 	while (tokens)
 	{
 		token = tokens->content;
 		if (token->type == TK_WORD)
 		{
-			ft_printf("%s\n", expand(token, sh));
+			char *arg = expand(token, sh);
+			if (!cmd->argv[0])
+				cmd->is_builtin = is_builtin(arg);
+			append_arg(cmd, arg);
 		}
 		if (token->type == TK_AP_OUT)
 		{
 			// CHECK IF HAS A TK_WORD AFTER
-			// CHECK AND EXPAND VAR(S)
-			// CHECK IF A FILE WITH THE TK_WORD PATH ALREADY EXIST
-			// CREATE FILE IF NOT
-			// SET OUTPUT TO FILE
-			// SET APPEND FLAG TO 1
+			if (next_is_word(tokens))
+			{
+				tokens = tokens->next;
+				token = tokens->content;
+				// CHECK AND EXPAND VAR(S)
+				char	*path = expand(token, sh);
+				// CHECK IF A FILE WITH THE TK_WORD PATH ALREADY EXIST
+				// CREATE FILE IF NOT
+				if (redir_out_check(path, 1))
+				{
+					free_token_lst(tokens);
+					free(path);
+					return (1);
+				}
+				// SET APPEND FLAG TO 1
+				cmd->append_output = 1;
+				// SET OUTPUT TO FILE
+				free(cmd->output_file);
+				cmd->output_file = path;
+			}
 		}
 		if (token->type == TK_RD_OUT)
 		{
 			// CHECK IF HAS A TK_WORD AFTER
-			// CHECK AND EXPAND VAR(S)
-			// CREATE NEW FILE
-			// SET OUTPUT TO FILE
-			// SET APPEND FLAG TO 0
+			if (next_is_word(tokens))
+			{
+				tokens = tokens->next;
+				token = tokens->content;
+				// CHECK AND EXPAND VAR(S)
+				char	*path = expand(token, sh);
+				// CHECK IF A FILE WITH THE TK_WORD PATH ALREADY EXIST
+				// CREATE FILE IF NOT
+				if (redir_out_check(path, 1))
+				{
+					free_token_lst(tokens);
+					free(path);
+					return (1);
+				}
+				// SET APPEND FLAG TO 0
+				cmd->append_output = 0;
+				// SET OUTPUT TO FILE
+				free(cmd->output_file);
+				cmd->output_file = path;
+			}
 		}
 		if (token->type == TK_RD_IN)
 		{
 			// CHECK IF HAS A TK_WORD AFTER
-			// CHECK AND EXPAND VAR(S)
-			// CHECK IF FILE EXISTS RETURN ERROR IF NOT
-			// SET INPUT TO FILE
+			if (next_is_word(tokens))
+			{
+				tokens = tokens->next;
+				token = tokens->content;
+				// CHECK AND EXPAND VAR(S)
+				char	*path = expand(token, sh);
+				// CHECK IF FILE EXISTS RETURN ERROR IF NOT
+				if (redir_in_check(path))
+				{
+					free(path);
+					free_token_lst(tokens);
+					return (0);
+				}
+				// SET INPUT TO FILE
+				free(cmd->append_output);
+				cmd->append_output = path;
+			}
 		}
 		if (token->type == TK_HEREDOC)
 		{
-			// TO BE DISCUSSED
+			if (next_is_word(tokens))
+			{
+				tokens = tokens->next;
+				token = tokens->content;
+				char	*delim;
+				if (token->expansion != EXP_NONE)
+					delim = strip_quotes(token->text);
+				else
+					delim = ft_strdup(token->text);
+				append_hd_delim(cmd, delim);
+			}
 		}
 		if (token->type == TK_PIPE)
 		{
 			// CHECK IF HAS A TK_WORD AFTER
-			// ADD CURRENT COMMAND TO SHELL CMD LIST
-			// INIT NEW COMMAND
+			if (next_is_word(tokens))
+			{
+				// ADD CURRENT COMMAND TO SHELL CMD LIST
+				append_cmd(sh, cmd);
+				// INIT NEW COMMAND
+				cmd = new_cmd();
+			}
 		}
 		tokens = tokens->next;
+		return (0);
 	}
 }
 

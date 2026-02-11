@@ -6,13 +6,13 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 15:15:46 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/09 14:11:08 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/11 12:10:56 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static char	*strip_quotes(char *text)
+char	*strip_quotes(char *text)
 {
 	return (ft_substr(text, 1, ft_strlen(text) - 2));
 }
