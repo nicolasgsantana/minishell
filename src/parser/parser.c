@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 10:14:53 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/11 15:24:22 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/11 16:10:45 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	append_arg(t_cmd *cmd, char *new_arg)
 
 	i = 0;
 	argc = get_argc(cmd->argv);
-	temp = malloc((argc + 1) * sizeof(char *));
+	temp = malloc((argc + 2) * sizeof(char *));
 	if (!temp)
 		return ;
 	while (i < argc)
