@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 10:14:53 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/11 16:10:45 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/11 17:32:17 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ t_cmd	*new_cmd(void)
 		return (NULL);
 	new_cmd->argv = NULL;
 	new_cmd->input_file = NULL;
+	new_cmd->output_file = NULL;
 	new_cmd->append_output = 0;
 	new_cmd->is_builtin = 0;
 	new_cmd->hd_delim = NULL;
