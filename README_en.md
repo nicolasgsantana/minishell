@@ -61,4 +61,4 @@ References used during development:
   - Perform isolated tests of some functionalities in the execution of built-in and native functions;
   - Quick searches for concepts;
 
- [Português](https://github.com/nicolasgsantana/minishell/edit/main/README.md) | *English*
+ [Português](https://github.com/nicolasgsantana/minishell/blob/main/README.md) | *English*
