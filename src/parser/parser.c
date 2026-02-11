@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 10:14:53 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/11 17:32:17 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/11 17:54:14 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,52 +14,6 @@
 
 char	*token_name(t_tk_type type);
 void	print_tokens(t_list *tokens);
-
-int	get_argc(char **argv)
-{
-	int	argc;
-
-	argc = 0;
-	if (!argv)
-		return (0);
-	while (argv[argc])
-		argc++;
-	return (argc);
-}
-
-void	free_argv(char **argv)
-{
-	int	i;
-
-	if (!argv)
-		return ;
-	i = 0;
-	while (argv[i])
-		free(argv[i++]);
-	free(argv);
-}
-
-void	append_arg(t_cmd *cmd, char *new_arg)
-{
-	char	**temp;
-	int		i;
-	int		argc;
-
-	i = 0;
-	argc = get_argc(cmd->argv);
-	temp = malloc((argc + 2) * sizeof(char *));
-	if (!temp)
-		return ;
-	while (i < argc)
-	{
-		temp[i] = ft_strdup(cmd->argv[i]);
-		i++;
-	}
-	temp[i++] = ft_strdup(new_arg);
-	temp[i] = NULL;
-	free_argv(cmd->argv);
-	cmd->argv = temp;
-}
 
 //TODO: CHECK HOW TO HANDLE CASE WHEN WORD IS EMPTY
 int	next_is_word(t_list *tokens)
