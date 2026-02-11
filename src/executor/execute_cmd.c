@@ -87,7 +87,7 @@ void	execute_cmd(t_cmd *cmd, t_shell *sh)
 	if (!path)
 	{
 		ft_putstr_fd(cmd->argv[0], 2);
-		ft_putstr_fd(": command not found", 2);
+		ft_putstr_fd(": command not found\n", 2);
 		exit(127);
 	}
 	execve(path, cmd->argv, sh->envp);
