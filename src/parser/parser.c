@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 10:14:53 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/11 17:54:14 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/11 18:22:37 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,37 +22,6 @@ int	next_is_word(t_list *tokens)
 
 	next_token = (tokens->next)->content;
 	return (next_token->type == TK_WORD);
-}
-
-int	redir_out_check(char *file, int append)
-{
-	int	fd;
-
-	if (append)
-		fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
-	else
-		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (fd < 0)
-	{
-		perror("minishell: ");
-		return (1);
-	}
-	close(fd);
-	return (0);
-}
-
-int	redir_in_check(char *file)
-{
-	int	fd;
-
-	fd = open(file, O_RDONLY);
-	if (fd < 0)
-	{
-		perror("minishell: ");
-		return (1);
-	}
-	close(fd);
-	return (0);
 }
 
 t_cmd	*new_cmd(void)
@@ -71,53 +40,6 @@ t_cmd	*new_cmd(void)
 	new_cmd->hd_expand = 0;
 	new_cmd->hd_count = 0;
 	return (new_cmd);
-}
-
-void	append_cmd(t_shell *sh, t_cmd *new_cmd)
-{
-	t_cmd	**temp;
-	int		i;
-
-	temp = sh->cmds;
-	sh->cmd_count += 1;
-	sh->cmds = malloc(sizeof(t_cmd *) * sh->cmd_count + 1);
-	if (!sh->cmds)
-		return ;
-	i = 0;
-	if (temp)
-	{
-		while (temp[i])
-		{
-			sh->cmds[i] = temp[i];
-			temp[i] = NULL;
-			i++;
-		}
-	}
-	sh->cmds[i++] = new_cmd;
-	sh->cmds[i] = NULL;
-	free(temp);
-}
-
-void	append_hd_delim(t_cmd *cmd, char *new_delim)
-{
-	int		i;
-	char	**temp;
-
-	temp = cmd->hd_delim;
-	cmd->hd_count += 1;
-	cmd->hd_delim = malloc(sizeof(char *) * cmd->hd_count + 1);
-	if (!cmd->hd_delim)
-		return ;
-	i = 0;
-	while (temp[i])
-	{
-		cmd->hd_delim[i] = temp[i];
-		temp[i] = NULL;
-		i++;
-	}
-	cmd->hd_delim[i++] = new_delim;
-	cmd->hd_delim[i] = NULL;
-	free(temp);
 }
 
 int	is_builtin(char *arg)

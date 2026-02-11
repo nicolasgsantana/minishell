@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 10:06:56 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/11 17:54:56 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/11 18:22:54 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,9 @@ int		valid_var_start(char *text);
 int		valid_name_char(char c);
 int		is_status(char *text);
 void	append_arg(t_cmd *cmd, char *new_arg);
+void	append_cmd(t_shell *sh, t_cmd *new_cmd);
+void	append_hd_delim(t_cmd *cmd, char *new_delim);
+int		redir_out_check(char *file, int append);
+int		redir_in_check(char *file);
 
 #endif
