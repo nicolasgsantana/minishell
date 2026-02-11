@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 19:37:55 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/01/28 17:30:12 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/11 13:22:08 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	child_process(int i, t_shell *sh, int *pipes)
 	}
 	if (apply_redir(sh->cmds[i]))
 		exit(1);
-	if (sh->cmds[i].is_builtin)
+	if ((sh->cmds[i])->is_builtin)
 		exit(execute_builtin(sh, sh->cmds[i]));
 	execute_cmd(sh->cmds[i], sh);
 }
