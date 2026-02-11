@@ -17,6 +17,8 @@ char	*make_env_var(char *key, char *value)
 	char	*tmp;
 	char	*res;
 
+	if (value == NULL)
+		return (ft_strdup(key));
 	tmp = ft_strjoin(key, "=");
 	res = ft_strjoin(tmp, value);
 	free(tmp);
@@ -67,7 +69,7 @@ int	handle_export_arg(t_shell *sh, char *arg)
 		free(key);
 	}
 	else
-		add_env(&sh->envp, arg, "");
+		add_env(&sh->envp, arg, NULL);
 	return (0);
 }
 

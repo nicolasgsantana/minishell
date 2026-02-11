@@ -20,10 +20,7 @@ int	ft_env(t_shell *sh)
 	while (sh->envp[i])
 	{
 		if (ft_strchr(sh->envp[i], '='))
-		{
-			if (sh->envp[i + 1])
-				ft_putendl_fd(sh->envp[i], STDOUT_FILENO);
-		}
+			ft_putendl_fd(sh->envp[i], STDOUT_FILENO);
 		i++;
 	}
 	return (0);
