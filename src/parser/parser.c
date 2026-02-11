@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 10:14:53 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/11 15:10:05 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/11 15:24:22 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,11 +129,14 @@ void	append_cmd(t_shell *sh, t_cmd *new_cmd)
 	if (!sh->cmds)
 		return ;
 	i = 0;
-	while (temp[i])
+	if (temp)
 	{
-		sh->cmds[i] = temp[i];
-		temp[i] = NULL;
-		i++;
+		while (temp[i])
+		{
+			sh->cmds[i] = temp[i];
+			temp[i] = NULL;
+			i++;
+		}
 	}
 	sh->cmds[i++] = new_cmd;
 	sh->cmds[i] = NULL;
@@ -303,6 +306,7 @@ int	parse(char *line, t_shell *sh)
 		}
 		tokens = tokens->next;
 	}
+	append_cmd(sh, cmd);
 	return (0);
 }
 
