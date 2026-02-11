@@ -48,12 +48,17 @@ cat < test.txt | grep morning > result.txt
 ```bash
 export NEW_VAR=value
 ```
-## Recursos
-<!-- 
-listando referências clássicas relacionadas ao tópico (documentação, artigos, tutoriais, etc.), bem como uma descrição de como a IA foi usada
-— especificando para quais tarefas e quais partes do projeto -->
-https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html
-https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf
-https://medium.com/@laamirimarouane8/42-minishell-guide-53600f49742b
-https://opensource.com/resources/what-bash
+Para sair digite `exit` ou `Ctrl + d`
 
+## Recursos
+Referências utilizadas durante o desenvolvimento:
+
+- [O que é Bash?](https://opensource.com/resources/what-bash);
+- [Guia Minishell](https://medium.com/@laamirimarouane8/42-minishell-guide-53600f49742b);
+- [Documentação Open Group](https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html);
+- [Introduction to Systems Programming: a Hands-on Approach by Gustavo A. Junipero Rodriguez-Rivera and Justin Ennen - cap. 5](https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf);
+- A IA foi utilizada para:
+  - Fazer testes isolados de algumas funcionalidades na execução de funções builtins e nativas;
+  - Pesquisas rápidas de conceitos;
+
+*Português* | [English](https://github.com/nicolasgsantana/minishell/blob/main/README_en.md)
