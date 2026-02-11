@@ -78,7 +78,7 @@ int	builtin_redir(t_shell *sh, t_cmd *cmd)
 void	executor(t_shell *sh)
 {
 	if (sh->cmd_count == 1 && sh->cmds[0].is_builtin)
-		sh->last_status = builtin_redir(sh, &sh->cmds[0]);
+		sh->last_status = builtin_redir(sh, sh->cmds[0]);
 	else
 		sh->last_status = execute_pipeline(sh);
 }
