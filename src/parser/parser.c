@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 10:14:53 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/11 13:26:23 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/11 18:22:37 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,48 +15,6 @@
 char	*token_name(t_tk_type type);
 void	print_tokens(t_list *tokens);
 
-int	get_argc(char **argv)
-{
-	int	argc;
-
-	argc = 0;
-	while (argv[argc])
-		argc++;
-	return (argc);
-}
-
-void	free_argv(char **argv)
-{
-	int	i;
-
-	i = 0;
-	while (argv[i])
-		free(argv[i++]);
-	free(argv);
-}
-
-void	append_arg(t_cmd *cmd, char *new_arg)
-{
-	char	**temp;
-	int		i;
-	int		argc;
-
-	i = 0;
-	argc = get_argc(cmd->argv);
-	temp = malloc((argc + 1) * sizeof(char *));
-	if (!temp)
-		return ;
-	while (i < argc)
-	{
-		temp[i] = ft_strdup(cmd->argv[i]);
-		i++;
-	}
-	temp[i++] = ft_strdup(new_arg);
-	temp[i] = NULL;
-	free_argv(cmd->argv);
-	cmd->argv = temp;
-}
-
 //TODO: CHECK HOW TO HANDLE CASE WHEN WORD IS EMPTY
 int	next_is_word(t_list *tokens)
 {
@@ -64,37 +22,6 @@ int	next_is_word(t_list *tokens)
 
 	next_token = (tokens->next)->content;
 	return (next_token->type == TK_WORD);
-}
-
-int	redir_out_check(char *file, int append)
-{
-	int	fd;
-
-	if (append)
-		fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
-	else
-		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (fd < 0)
-	{
-		perror("minishell: ");
-		return (1);
-	}
-	close(fd);
-	return (0);
-}
-
-int	redir_in_check(char *file)
-{
-	int	fd;
-
-	fd = open(file, O_RDONLY);
-	if (fd < 0)
-	{
-		perror("minishell: ");
-		return (1);
-	}
-	close(fd);
-	return (0);
 }
 
 t_cmd	*new_cmd(void)
@@ -106,56 +33,13 @@ t_cmd	*new_cmd(void)
 		return (NULL);
 	new_cmd->argv = NULL;
 	new_cmd->input_file = NULL;
+	new_cmd->output_file = NULL;
 	new_cmd->append_output = 0;
 	new_cmd->is_builtin = 0;
 	new_cmd->hd_delim = NULL;
 	new_cmd->hd_expand = 0;
 	new_cmd->hd_count = 0;
 	return (new_cmd);
-}
-
-void	append_cmd(t_shell *sh, t_cmd *new_cmd)
-{
-	t_cmd	**temp;
-	int		i;
-
-	temp = sh->cmds;
-	sh->cmd_count += 1;
-	sh->cmds = malloc(sizeof(t_cmd *) * sh->cmd_count + 1);
-	if (!sh->cmds)
-		return ;
-	i = 0;
-	while (temp[i])
-	{
-		sh->cmds[i] = temp[i];
-		temp[i] = NULL;
-		i++;
-	}
-	sh->cmds[i++] = new_cmd;
-	sh->cmds[i] = NULL;
-	free(temp);
-}
-
-void	append_hd_delim(t_cmd *cmd, char *new_delim)
-{
-	int		i;
-	char	**temp;
-
-	temp = cmd->hd_delim;
-	cmd->hd_count += 1;
-	cmd->hd_delim = malloc(sizeof(char *) * cmd->hd_count + 1);
-	if (!cmd->hd_delim)
-		return ;
-	i = 0;
-	while (temp[i])
-	{
-		cmd->hd_delim[i] = temp[i];
-		temp[i] = NULL;
-		i++;
-	}
-	cmd->hd_delim[i++] = new_delim;
-	cmd->hd_delim[i] = NULL;
-	free(temp);
 }
 
 int	is_builtin(char *arg)
@@ -197,7 +81,7 @@ int	parse(char *line, t_shell *sh)
 		if (token->type == TK_WORD)
 		{
 			char *arg = expand(token, sh);
-			if (!cmd->argv[0])
+			if (!cmd->argv)
 				cmd->is_builtin = is_builtin(arg);
 			append_arg(cmd, arg);
 		}
@@ -263,7 +147,7 @@ int	parse(char *line, t_shell *sh)
 				{
 					free(path);
 					free_token_lst(tokens);
-					return (0);
+					return (1);
 				}
 				// SET INPUT TO FILE
 				free(cmd->input_file);
@@ -286,8 +170,10 @@ int	parse(char *line, t_shell *sh)
 		}
 		if (token->type == TK_PIPE)
 		{
-			// CHECK IF HAS A TK_WORD AFTER
-			if (next_is_word(tokens))
+			tokens = tokens->next;
+			token = tokens->content;
+			// CHECK IF HAS A TK AFTER
+			if (token->type != TK_EOF)
 			{
 				// ADD CURRENT COMMAND TO SHELL CMD LIST
 				append_cmd(sh, cmd);
@@ -297,6 +183,7 @@ int	parse(char *line, t_shell *sh)
 		}
 		tokens = tokens->next;
 	}
+	append_cmd(sh, cmd);
 	return (0);
 }
 
