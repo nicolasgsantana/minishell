@@ -19,11 +19,11 @@ void	child_process(int i, t_shell *sh, int *pipes)
 		setup_pipes(i, sh->cmd_count, pipes);
 		close_all_pipes(pipes, sh->cmd_count);
 	}
-	if (apply_redir(&sh->cmds[i]))
+	if (apply_redir(sh->cmds[i]))
 		exit(1);
 	if (sh->cmds[i].is_builtin)
-		exit(execute_builtin(sh, &sh->cmds[i]));
-	execute_cmd(&sh->cmds[i], sh);
+		exit(execute_builtin(sh, sh->cmds[i]));
+	execute_cmd(sh->cmds[i], sh);
 }
 
 int	wait_for_children(void)
