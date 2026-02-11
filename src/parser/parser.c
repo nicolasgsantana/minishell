@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 10:14:53 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/11 13:26:23 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/11 15:10:05 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	get_argc(char **argv)
 	int	argc;
 
 	argc = 0;
+	if (!argv)
+		return (0);
 	while (argv[argc])
 		argc++;
 	return (argc);
@@ -29,6 +31,8 @@ void	free_argv(char **argv)
 {
 	int	i;
 
+	if (!argv)
+		return ;
 	i = 0;
 	while (argv[i])
 		free(argv[i++]);
@@ -197,7 +201,7 @@ int	parse(char *line, t_shell *sh)
 		if (token->type == TK_WORD)
 		{
 			char *arg = expand(token, sh);
-			if (!cmd->argv[0])
+			if (!cmd->argv)
 				cmd->is_builtin = is_builtin(arg);
 			append_arg(cmd, arg);
 		}
@@ -263,7 +267,7 @@ int	parse(char *line, t_shell *sh)
 				{
 					free(path);
 					free_token_lst(tokens);
-					return (0);
+					return (1);
 				}
 				// SET INPUT TO FILE
 				free(cmd->input_file);
@@ -286,8 +290,10 @@ int	parse(char *line, t_shell *sh)
 		}
 		if (token->type == TK_PIPE)
 		{
-			// CHECK IF HAS A TK_WORD AFTER
-			if (next_is_word(tokens))
+			tokens = tokens->next;
+			token = tokens->content;
+			// CHECK IF HAS A TK AFTER
+			if (token->type != TK_EOF)
 			{
 				// ADD CURRENT COMMAND TO SHELL CMD LIST
 				append_cmd(sh, cmd);

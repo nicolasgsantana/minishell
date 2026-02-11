@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:01:31 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/11 11:32:01 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/11 13:34:33 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,6 @@ char	*make_env_var(char *key, char *value);
 int		execute_builtin(t_shell *sh, t_cmd *cmd);
 
 int		apply_redir(t_cmd *cmd);
+char	**dup_env(char **envp);
 
 #endif
