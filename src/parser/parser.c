@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 10:14:53 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/11 12:38:38 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/11 13:26:23 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	redir_out_check(char *file, int append)
 		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
 	{
-		perror(fd);
+		perror("minishell: ");
 		return (1);
 	}
 	close(fd);
@@ -90,7 +90,7 @@ int	redir_in_check(char *file)
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 	{
-		perror(fd);
+		perror("minishell: ");
 		return (1);
 	}
 	close(fd);
@@ -266,8 +266,8 @@ int	parse(char *line, t_shell *sh)
 					return (0);
 				}
 				// SET INPUT TO FILE
-				free(cmd->append_output);
-				cmd->append_output = path;
+				free(cmd->input_file);
+				cmd->input_file = path;
 			}
 		}
 		if (token->type == TK_HEREDOC)
@@ -296,8 +296,8 @@ int	parse(char *line, t_shell *sh)
 			}
 		}
 		tokens = tokens->next;
-		return (0);
 	}
+	return (0);
 }
 
 // !!!DEBUG ONLY REMOVE LATER
