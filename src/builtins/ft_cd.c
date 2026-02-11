@@ -32,12 +32,24 @@ char	*check_cd_args(t_cmd *cmd, t_shell *sh, int *print_pwd)
 		}
 		return (path);
 	}
-	if (!cmd->argv[1] || !ft_strncmp(cmd->argv[1], "--", 3))
+	if (!cmd->argv[1] || !ft_strncmp(cmd->argv[1], "--", 3)
+		|| !ft_strncmp(cmd->argv[1], "~", 2))
 	{
 		path = get_var("$HOME", sh);
 		return (path);
 	}
 	return (ft_strdup(cmd->argv[1]));
+}
+
+int	chdir_path(char *path)
+{
+	if (chdir(path) == -1)
+	{
+		perror("cd");
+		free(path);
+		return (1);
+	}
+	return (0);
 }
 
 int	ft_cd(t_shell *sh, t_cmd *cmd)
@@ -53,14 +65,9 @@ int	ft_cd(t_shell *sh, t_cmd *cmd)
 	path = check_cd_args(cmd, sh, &print_pwd);
 	if (!path)
 		return (1);
-	if (chdir(path) == -1)
-	{
-		perror("cd");
-		free(path);
+	if (chdir(path))
 		return (1);
-	}
-	if (oldpwd[0])
-		update_env(sh->envp, "OLDPWD", oldpwd);
+	update_env(sh->envp, "OLDPWD", oldpwd);
 	if (getcwd(cwd, sizeof(cwd)))
 	{
 		update_env(sh->envp, "PWD", cwd);
