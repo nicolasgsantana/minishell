@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 10:06:56 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/11 18:22:54 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/11 18:38:14 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,7 @@ void	append_cmd(t_shell *sh, t_cmd *new_cmd);
 void	append_hd_delim(t_cmd *cmd, char *new_delim);
 int		redir_out_check(char *file, int append);
 int		redir_in_check(char *file);
+int		next_is_word(t_list *tokens);
+int		is_builtin(char *arg);
 
 #endif
