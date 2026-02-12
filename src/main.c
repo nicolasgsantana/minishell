@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 10:59:11 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/12 18:40:57 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/12 20:26:24 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,12 @@ void	reset_shell(t_shell *sh)
 
 	cmds = sh->cmds;
 	i = 0;
-	while(cmds[i])
-		free_cmd(cmds[i++]);
-	free(cmds);
+	if (cmds)
+	{
+		while(cmds[i])
+			free_cmd(cmds[i++]);
+		free(cmds);
+	}
 	sh->cmds = NULL;
 	sh->cmd_count = 0;
 }
@@ -82,8 +85,8 @@ int	main(int argc, char **argv, char **envp)
 		if (ft_strlen(line) > 0)
 		{
 			add_history(line);
-			parse(line, sh);
-			executor(sh);
+			if(!parse(line, sh))
+				executor(sh);
 			reset_shell(sh);
 		}
 		free(line);
