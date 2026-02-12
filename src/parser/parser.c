@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 10:14:53 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/11 18:39:50 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/12 11:23:02 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,47 @@ t_cmd	*new_cmd(void)
 	return (new_cmd);
 }
 
+void	handle_tk_word(t_cmd *cmd, t_token *tk, t_shell *sh)
+{
+	char	*arg;
+
+	arg = expand(tk, sh);
+	if (!cmd->argv)
+		cmd->is_builtin = is_builtin(arg);
+	append_arg(cmd, arg);
+}
+
+int	handle_tk_rd_out(t_cmd *cmd, t_token *tk, t_shell *sh, int append)
+{
+	char	*path;
+
+	path = expand(tk, sh);
+	if (redir_out_check(path, 1))
+	{
+		free(path);
+		return (1);
+	}
+	cmd->append_output = append;
+	free(cmd->output_file);
+	cmd->output_file = path;
+	return (0);
+}
+
+int	handle_tk_rd_in(t_cmd *cmd, t_token *tk, t_shell *sh)
+{
+	char	*path;
+
+	path = expand(tk, sh);
+	if (redir_in_check(path))
+	{
+		free(path);
+		return (1);
+	}
+	free(cmd->input_file);
+	cmd->input_file = path;
+	return (0);
+}
+
 int	parse(char *line, t_shell *sh)
 {
 	t_list	*tokens;
@@ -48,10 +89,7 @@ int	parse(char *line, t_shell *sh)
 		token = tokens->content;
 		if (token->type == TK_WORD)
 		{
-			char *arg = expand(token, sh);
-			if (!cmd->argv)
-				cmd->is_builtin = is_builtin(arg);
-			append_arg(cmd, arg);
+			handle_tk_word(cmd, token, sh);
 		}
 		if (token->type == TK_AP_OUT)
 		{
@@ -60,21 +98,11 @@ int	parse(char *line, t_shell *sh)
 			{
 				tokens = tokens->next;
 				token = tokens->content;
-				// CHECK AND EXPAND VAR(S)
-				char	*path = expand(token, sh);
-				// CHECK IF A FILE WITH THE TK_WORD PATH ALREADY EXIST
-				// CREATE FILE IF NOT
-				if (redir_out_check(path, 1))
+				if (handle_tk_rd_out(cmd, token, sh, 1))
 				{
 					free_token_lst(tokens);
-					free(path);
 					return (1);
 				}
-				// SET APPEND FLAG TO 1
-				cmd->append_output = 1;
-				// SET OUTPUT TO FILE
-				free(cmd->output_file);
-				cmd->output_file = path;
 			}
 		}
 		if (token->type == TK_RD_OUT)
@@ -84,21 +112,11 @@ int	parse(char *line, t_shell *sh)
 			{
 				tokens = tokens->next;
 				token = tokens->content;
-				// CHECK AND EXPAND VAR(S)
-				char	*path = expand(token, sh);
-				// CHECK IF A FILE WITH THE TK_WORD PATH ALREADY EXIST
-				// CREATE FILE IF NOT
-				if (redir_out_check(path, 1))
+				if (handle_tk_rd_out(cmd, token, sh, 0))
 				{
 					free_token_lst(tokens);
-					free(path);
 					return (1);
 				}
-				// SET APPEND FLAG TO 0
-				cmd->append_output = 0;
-				// SET OUTPUT TO FILE
-				free(cmd->output_file);
-				cmd->output_file = path;
 			}
 		}
 		if (token->type == TK_RD_IN)
@@ -108,18 +126,11 @@ int	parse(char *line, t_shell *sh)
 			{
 				tokens = tokens->next;
 				token = tokens->content;
-				// CHECK AND EXPAND VAR(S)
-				char	*path = expand(token, sh);
-				// CHECK IF FILE EXISTS RETURN ERROR IF NOT
-				if (redir_in_check(path))
+				if (handle_tk_rd_in(cmd, token, sh))
 				{
-					free(path);
 					free_token_lst(tokens);
 					return (1);
 				}
-				// SET INPUT TO FILE
-				free(cmd->input_file);
-				cmd->input_file = path;
 			}
 		}
 		if (token->type == TK_HEREDOC)
