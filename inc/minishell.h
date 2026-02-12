@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:01:31 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/12 11:53:04 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/12 16:31:35 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,6 @@
 # include "libft.h"
 # include "lexer.h"
 
-typedef struct s_hd
-{
-	char	*hd_delim;
-	int		hd_expand;
-} t_hd;
-
 typedef struct s_cmd
 {
 	char	**argv;
@@ -37,9 +31,10 @@ typedef struct s_cmd
 	char	*output_file;
 	int		append_output;
 	int		is_builtin;
-	t_hd	*hds;
+	char	**hd_delim;
+	int		hd_expand;
 	int		hd_count;
-}	t_cmd;
+} t_cmd;
 
 typedef struct s_shell
 {

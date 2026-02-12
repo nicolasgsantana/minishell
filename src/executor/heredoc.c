@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 02:12:19 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/12 12:18:49 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/12 16:34:32 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,13 @@ int	read_hd_lines(t_cmd *cmd, int fd, t_shell *sh, int index)
 		line = readline("> ");
 		if (!line)
 			break ;
-		if (ft_strncmp(line, cmd->hds[index].hd_delim,
-				ft_strlen(cmd->hds[index].hd_delim) + 1) == 0)
+		if (ft_strncmp(line, cmd->hd_delim[index],
+				ft_strlen(cmd->hd_delim[index]) + 1) == 0)
 		{
 			free(line);
 			break ;
 		}
-		if (cmd->hds[index].hd_expand)
+		if (cmd->hd_expand)
 		{
 			expanded = expand_line(line, sh);
 			free(line);

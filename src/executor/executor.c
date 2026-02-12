@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 19:18:45 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/11 13:22:28 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/12 16:52:00 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,15 @@ int	builtin_redir(t_shell *sh, t_cmd *cmd)
 
 void	executor(t_shell *sh)
 {
+	int	i;
+
+	i = 0;
+	while (i < sh->cmd_count)
+	{
+		if (sh->cmds[i]->hd_count > 0)
+			prepare_heredocs(sh->cmds[i], sh);
+		i++;
+	}
 	if (sh->cmd_count == 1 && (sh->cmds[0])->is_builtin)
 		sh->last_status = builtin_redir(sh, sh->cmds[0]);
 	else
