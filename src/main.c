@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 10:59:11 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/12 16:42:42 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/12 17:11:24 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,12 +97,15 @@ void	print_sh(t_shell *sh)
 {
 	ft_printf("CMDs:\n");
 	int i = 0;
-	while (sh->cmds[i])
+	if (sh->cmds)
 	{
-		int j = 0;
-		while (sh->cmds[i]->argv[j])
-			ft_printf("%s\n",sh->cmds[i]->argv[j++]);
-		i++;
+		while (sh->cmds[i])
+		{
+			int j = 0;
+			while (sh->cmds[i]->argv[j])
+				ft_printf("%s\n",sh->cmds[i]->argv[j++]);
+			i++;
+		}
 	}
 	ft_printf("\n\n");
 }
