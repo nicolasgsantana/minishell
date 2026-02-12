@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 02:12:19 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/10 14:33:10 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/12 12:18:49 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*expand_line(char *line, t_shell *sh)
 	return (result);
 }
 
-int	read_hd_lines(t_cmd *cmd, int fd, t_shell *sh, int *i)
+int	read_hd_lines(t_cmd *cmd, int fd, t_shell *sh, int index)
 {
 	char	*line;
 	char	*expanded;
@@ -65,13 +65,13 @@ int	read_hd_lines(t_cmd *cmd, int fd, t_shell *sh, int *i)
 		line = readline("> ");
 		if (!line)
 			break ;
-		if (ft_strncmp(line, cmd->hd_delim[*i],
-				ft_strlen(cmd->hd_delim[*i]) + 1) == 0)
+		if (ft_strncmp(line, cmd->hds[index].hd_delim,
+				ft_strlen(cmd->hds[index].hd_delim) + 1) == 0)
 		{
 			free(line);
 			break ;
 		}
-		if (cmd->hd_expand)
+		if (cmd->hds[index].hd_expand)
 		{
 			expanded = expand_line(line, sh);
 			free(line);
@@ -108,7 +108,7 @@ int	prepare_heredocs(t_cmd *cmd, t_shell *sh)
 		fd = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		if (fd < 0)
 			return (1);
-		read_hd_lines(cmd, fd, sh, &i);
+		read_hd_lines(cmd, fd, sh, i);
 		close(fd);
 		cmd->input_file = filename;
 		i++;

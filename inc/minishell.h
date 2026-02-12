@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:01:31 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/12 11:24:25 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/12 11:53:04 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_cmd
 	char	*output_file;
 	int		append_output;
 	int		is_builtin;
-	t_hd	**hds;
+	t_hd	*hds;
 	int		hd_count;
 }	t_cmd;
 
