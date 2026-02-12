@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins_utils.c                                   :+:      :+:    :+:   */
+/*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 10:30:06 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/03 12:29:12 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/12 17:08:07 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ int	find_env_index(char **envp, char *key)
 	len = ft_strlen(key);
 	while (envp[i])
 	{
-		if (!ft_strncmp(envp[i], key, len) && envp[i][len] == '=')
+		if (!ft_strncmp(envp[i], key, len) && (envp[i][len] == '='
+			|| envp[i][len] == '\0'))
 			return (i);
 		i++;
 	}
