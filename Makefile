@@ -47,6 +47,7 @@ SRC = $(addprefix src/, main.c \
 						parser/append.c \
 						parser/check_redir.c \
 						parser/check_misc.c \
+						parser/tk_handlers.c \
 						expansion/expansion.c \
 						expansion/get_var.c \
 						expansion/validation.c \
