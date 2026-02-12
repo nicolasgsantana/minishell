@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:01:31 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/11 13:34:33 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/12 11:24:25 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@
 # include "libft.h"
 # include "lexer.h"
 
+typedef struct s_hd
+{
+	char	*hd_delim;
+	int		hd_expand;
+} t_hd;
+
 typedef struct s_cmd
 {
 	char	**argv;
@@ -31,8 +37,7 @@ typedef struct s_cmd
 	char	*output_file;
 	int		append_output;
 	int		is_builtin;
-	char	**hd_delim;
-	int		hd_expand;
+	t_hd	**hds;
 	int		hd_count;
 }	t_cmd;
 
