@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 10:59:11 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/12 17:26:38 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/12 18:40:57 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ int	main(int argc, char **argv, char **envp)
 		{
 			add_history(line);
 			parse(line, sh);
-			print_sh(sh);
 			executor(sh);
 			reset_shell(sh);
 		}
