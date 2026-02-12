@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 19:18:45 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/01/27 19:45:04 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/12 19:54:37 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ char	*find_path(char *cmd, char **envp)
 	char	*path;
 	int		i;
 
+	if (ft_strchr(cmd, '/'))
+		return (ft_strdup(cmd));
 	path = get_env_path(envp);
 	dirs = ft_split(path, ':');
 	i = 0;
@@ -91,7 +93,8 @@ void	execute_cmd(t_cmd *cmd, t_shell *sh)
 		exit(127);
 	}
 	execve(path, cmd->argv, sh->envp);
-	perror("execve");
+	write(STDERR_FILENO, "minishell: ", 12);
+	perror(cmd->argv[0]);
 	free(path);
 	exit(126);
 }
