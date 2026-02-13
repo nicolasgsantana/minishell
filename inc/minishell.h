@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:01:31 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/13 18:22:46 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/13 18:10:56 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # include "lexer.h"
 # include "struct.h"
 # include "parser.h"
+
+extern volatile sig_atomic_t	g_received_signal;
 
 int		prepare_heredocs(t_cmd *cmd, t_shell *sh);
 void	child_process(int i, t_shell *sh, int *pipes);
