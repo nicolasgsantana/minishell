@@ -6,11 +6,23 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 19:18:45 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/12 18:41:38 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/13 18:43:08 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	close_all_fds_except_std(void)
+{
+	int	fd;
+
+	fd = 3;
+	while (fd < 256)
+	{
+		close(fd);
+		fd++;
+	}
+}
 
 int	execute_pipeline(t_shell *sh)
 {
