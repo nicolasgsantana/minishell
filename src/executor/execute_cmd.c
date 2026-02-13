@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 19:18:45 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/12 19:54:37 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/13 19:53:01 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void	execute_cmd(t_cmd *cmd, t_shell *sh)
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(cmd->argv[0], 2);
 		ft_putstr_fd(": command not found\n", 2);
+		free_sh(sh);
 		exit(127);
 	}
 	execve(path, cmd->argv, sh->envp);

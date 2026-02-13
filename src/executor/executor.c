@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 19:18:45 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/13 18:43:08 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/13 19:52:02 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	execute_pipeline(t_shell *sh)
 	}
 	close_all_pipes(pipes, sh->cmd_count);
 	free(pipes);
+	close_all_fds_except_std();
 	return (wait_for_children());
 }
 
