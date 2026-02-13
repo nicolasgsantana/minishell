@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 10:59:11 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/13 17:45:10 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/13 18:22:15 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,18 @@ void	reset_shell(t_shell *sh)
 	}
 	sh->cmds = NULL;
 	sh->cmd_count = 0;
+}
+
+void	free_sh(t_shell *sh)
+{
+	int	i;
+
+	reset_shell(sh);
+	i = 0;
+	while (sh->envp[i])
+		free(sh->envp[i++]);
+	free(sh->envp);
+	free(sh);
 }
 
 int	main(int argc, char **argv, char **envp)
