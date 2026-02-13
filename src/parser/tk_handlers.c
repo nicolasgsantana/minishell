@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 20:09:03 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/12 21:03:06 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/12 21:05:58 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	handle_tk_heredoc(t_cmd *cmd, t_list **tks)
 		else
 		{
 			delim = ft_strdup(token->text);
-			cmd->hd_delim=0;
+			cmd->hd_expand=0;
 		}
 		append_hd_delim(cmd, delim);
 		return (0);
