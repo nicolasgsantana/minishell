@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:01:31 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/13 14:15:29 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/13 16:07:33 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,6 @@ char	*make_env_var(char *key, char *value);
 int		execute_builtin(t_shell *sh, t_cmd *cmd);
 int		apply_redir(t_cmd *cmd);
 char	**dup_env(char **envp);
+void	cleanup_hd(t_cmd *cmd);
 
 #endif

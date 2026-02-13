@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 10:59:11 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/12 20:26:24 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/13 16:01:04 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,10 @@ void	reset_shell(t_shell *sh)
 	if (cmds)
 	{
 		while(cmds[i])
+		{
+			cleanup_hd(cmds[i]);
 			free_cmd(cmds[i++]);
+		}
 		free(cmds);
 	}
 	sh->cmds = NULL;
