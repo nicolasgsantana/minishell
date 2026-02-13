@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 10:59:11 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/13 19:39:23 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/13 19:43:27 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	reset_shell(t_shell *sh)
 	}
 	sh->cmds = NULL;
 	sh->cmd_count = 0;
-	rl_clear_history();
 }
 
 void	free_sh(t_shell *sh)
@@ -78,6 +77,7 @@ void	free_sh(t_shell *sh)
 	free(sh->envp);
 	free(sh);
 	close_all_fds_except_std();
+	rl_clear_history();
 }
 
 int	main(int argc, char **argv, char **envp)
