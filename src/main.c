@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 10:59:11 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/13 19:43:27 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/13 20:07:24 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,11 @@ int	main(int argc, char **argv, char **envp)
 	{	
 		line = readline("minishell> ");
 		if (!line)
+		{
+			ft_putstr_fd("exit\n", 1);
+			free_sh(sh);
 			break ;
+		}
 		if (ft_strlen(line) > 0)
 		{
 			add_history(line);
