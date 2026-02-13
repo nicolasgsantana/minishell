@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 10:59:11 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/13 18:22:15 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/13 18:48:35 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	free_sh(t_shell *sh)
 		free(sh->envp[i++]);
 	free(sh->envp);
 	free(sh);
+	close_all_fds_except_std();
 }
 
 int	main(int argc, char **argv, char **envp)
