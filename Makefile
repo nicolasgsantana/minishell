@@ -21,6 +21,7 @@ INCLUDES = -I$(INC_DIR) -I$(LIBFT_DIR)/inc
 LIBS = $(LIBFT) -lreadline
 
 SRC = $(addprefix src/, main.c \
+						signals.c \
 						executor/exec_utils.c \
 						executor/execute_cmd.c \
 						executor/executor.c \
