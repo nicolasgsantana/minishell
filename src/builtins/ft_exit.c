@@ -6,11 +6,17 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 14:18:28 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/13 18:24:53 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/13 20:31:30 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	error_message_and_clean(char *str, t_shell *sh)
+{
+	printf("%s", str);
+	free_sh(sh);
+}
 
 int	is_numeric(char *str)
 {
@@ -37,26 +43,22 @@ int	ft_exit(t_shell *sh, t_cmd *cmd)
 	if (!cmd->argv[1])
 	{
 		nb = sh->last_status;
-		printf("exit\n");
-		free_sh(sh);
+		error_message_and_clean("exit\n", sh);
 		exit(nb);
 	}
 	if (!is_numeric(cmd->argv[1]))
 	{
-		printf("exit\n");
-		printf("minishell: exit: %s: numeric argument required\n",
+		printf("exit\nminishell: exit: %s: numeric argument required",
 			cmd->argv[1]);
-		free_sh(sh);
+		error_message_and_clean("\n", sh);
 		exit (2);
 	}
 	if (cmd->argv[2])
 	{
-		printf("exit\n");
-		printf("minishell: exit: too many arguments\n");
+		printf("exit\nminishell: exit: too many arguments\n");
 		return (1);
 	}
 	nb = ft_atoi(cmd->argv[1]);
 	printf("exit\n");
-	free_sh(sh);
 	exit((unsigned char)nb);
 }
