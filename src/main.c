@@ -6,13 +6,11 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 10:59:11 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/13 16:03:39 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/13 16:57:03 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	print_sh(t_shell *sh);
 
 t_shell	*init_shell(char **envp)
 {
