@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 18:18:12 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/11 18:19:08 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/13 12:42:59 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	redir_out_check(char *file, int append)
 		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
 	{
-		perror("minishell: ");
+		ft_putstr_fd("minishell: ", STDERR_FILENO);
+		perror(file);
 		return (1);
 	}
 	close(fd);
@@ -36,7 +37,8 @@ int	redir_in_check(char *file)
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 	{
-		perror("minishell: ");
+		ft_putstr_fd("minishell: ", STDERR_FILENO);
+		perror(file);
 		return (1);
 	}
 	close(fd);
