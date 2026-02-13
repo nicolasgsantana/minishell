@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 15:51:08 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/09 14:11:19 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/13 14:31:05 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*get_var_name(char *text)
 char	*get_last_status(char *var_name, int last_status)
 {
 	free(var_name);
-	return (ft_strdup(ft_itoa(last_status)));
+	return (ft_itoa(last_status));
 }
 
 char	*get_var(char *text, t_shell *sh)
