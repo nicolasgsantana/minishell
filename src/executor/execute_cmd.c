@@ -88,13 +88,12 @@ void	execute_cmd(t_cmd *cmd, t_shell *sh)
 	path = find_path(cmd->argv[0], sh->envp);
 	if (!path)
 	{
+		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(cmd->argv[0], 2);
 		ft_putstr_fd(": command not found\n", 2);
 		exit(127);
 	}
 	execve(path, cmd->argv, sh->envp);
-	write(STDERR_FILENO, "minishell: ", 12);
-	perror(cmd->argv[0]);
 	free(path);
 	exit(126);
 }
