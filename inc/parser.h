@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 10:06:56 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/12 20:19:30 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/13 12:11:37 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 # define QT_ERR "minishell: error: open quotes\n"
 # define PIPE_ERR "minishell: error: expected token after '|'\n"
+# define PIPE_ERR_2 "minishell: error: expected token before '|'\n"
 # define HD_ERR "minishell: error: expected delimiter after '<<'\n"
 # define RDIN_ERR "minishell: error: expected path after '<'\n"
 # define RDOUT_ERR "minishell: error: expected path after '>'\n"
