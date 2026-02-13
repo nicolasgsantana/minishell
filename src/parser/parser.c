@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 10:14:53 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/12 20:18:03 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/12 22:19:08 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,20 +69,23 @@ int	handle_tks(t_cmd **cmd, t_shell *sh, t_list **tks)
 int	parse(char *line, t_shell *sh)
 {
 	t_list	*tokens;
+	t_list	*head;
 	t_cmd	*cmd;
 
 	if (init_tokens(line, &tokens))
 		return (1);
+	head = tokens;
 	cmd = new_cmd();
 	while (tokens)
 	{
 		if(handle_tks(&cmd, sh, &tokens))
 		{
-			free_token_lst(tokens);
+			free_token_lst(head);
 			return (1);
 		}
 		tokens = tokens->next;
 	}
 	append_cmd(sh, cmd);
+	free_token_lst(head);
 	return (0);
 }
