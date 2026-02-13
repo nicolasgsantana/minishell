@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 20:09:03 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/13 12:31:45 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/13 12:43:52 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	handle_tk_rd_out(t_cmd *cmd, t_shell *sh, t_list **tks, int ap)
 		if (redir_out_check(path, 1))
 		{
 			free(path);
+			sh->last_status = 1;
 			return (1);
 		}
 		cmd->append_output = ap;
@@ -65,6 +66,7 @@ int	handle_tk_rd_in(t_cmd *cmd, t_shell *sh, t_list **tks)
 		if (redir_in_check(path))
 		{
 			free(path);
+			sh->last_status = 1;
 			return (1);
 		}
 		free(cmd->input_file);
