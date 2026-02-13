@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:01:31 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/12 16:31:35 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/13 14:15:29 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,31 +23,10 @@
 # include <fcntl.h>
 # include "libft.h"
 # include "lexer.h"
-
-typedef struct s_cmd
-{
-	char	**argv;
-	char	*input_file;
-	char	*output_file;
-	int		append_output;
-	int		is_builtin;
-	char	**hd_delim;
-	int		hd_expand;
-	int		hd_count;
-} t_cmd;
-
-typedef struct s_shell
-{
-	t_cmd	**cmds;
-	int		cmd_count;
-	char	**envp;
-	int		last_status;
-}	t_shell;
-
+# include "struct.h"
 # include "parser.h"
 
 int		prepare_heredocs(t_cmd *cmd, t_shell *sh);
-
 void	child_process(int i, t_shell *sh, int *pipes);
 int		wait_for_children(void);
 int		*create_pipes(int cmd_count);
@@ -55,7 +34,6 @@ void	setup_pipes(int i, int cmd_count, int *pipes);
 void	close_all_pipes(int *pipes, int cmd_count);
 void	execute_cmd(t_cmd *cmd, t_shell *sh);
 void	executor(t_shell *sh);
-
 int		ft_cd(t_shell *sh, t_cmd *cmd);
 int		ft_echo(t_cmd *cmd);
 int		ft_env(t_shell *sh);
@@ -70,7 +48,6 @@ int		is_valid_identifier(char *str);
 int		update_env(char **envp, char *key, char *value);
 char	*make_env_var(char *key, char *value);
 int		execute_builtin(t_shell *sh, t_cmd *cmd);
-
 int		apply_redir(t_cmd *cmd);
 char	**dup_env(char **envp);
 
