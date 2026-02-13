@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 20:09:03 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/13 12:43:52 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/13 15:54:28 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	handle_tk_rd_out(t_cmd *cmd, t_shell *sh, t_list **tks, int ap)
 		cmd->output_file = path;
 		return (0);
 	}
+	sh->last_status = 2;
 	if (ap)
 		ft_putstr_fd(APP_ERR, STDERR_FILENO);
 	else
@@ -73,11 +74,12 @@ int	handle_tk_rd_in(t_cmd *cmd, t_shell *sh, t_list **tks)
 		cmd->input_file = path;
 		return (0);
 	}
+	sh->last_status = 2;
 	ft_putstr_fd(RDIN_ERR, STDERR_FILENO);
 	return (1);
 }
 
-int	handle_tk_heredoc(t_cmd *cmd, t_list **tks)
+int	handle_tk_heredoc(t_cmd *cmd, t_list **tks, t_shell *sh)
 {
 	char	*delim;
 	t_token	*token;
@@ -99,6 +101,7 @@ int	handle_tk_heredoc(t_cmd *cmd, t_list **tks)
 		append_hd_delim(cmd, delim);
 		return (0);
 	}
+	sh->last_status = 2;
 	ft_putstr_fd(HD_ERR, STDERR_FILENO);
 	return (1);
 }
@@ -114,6 +117,7 @@ int	handle_tk_pipe(t_cmd **cmd, t_list **tks, t_shell *sh)
 		*cmd = new_cmd();
 		return (0);
 	}
+	sh->last_status = 2;
 	ft_putstr_fd(PIPE_ERR, STDERR_FILENO);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 10:14:53 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/13 15:38:30 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/13 16:00:18 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	handle_tks(t_cmd **cmd, t_shell *sh, t_list **tks)
 		if (handle_tk_rd_in(*cmd, sh, tks))
 			return (1);
 	if (token->type == TK_HEREDOC)
-		if (handle_tk_heredoc(*cmd, tks))
+		if (handle_tk_heredoc(*cmd, tks, sh))
 			return (1);
 	if (token->type == TK_PIPE)
 		if (handle_tk_pipe(cmd, tks, sh))
@@ -66,13 +66,14 @@ int	handle_tks(t_cmd **cmd, t_shell *sh, t_list **tks)
 	return (0);
 }
 
-int	is_head_tk_pipe(t_list *tokens)
+int	is_head_tk_pipe(t_list *tokens, t_shell *sh)
 {
 	t_token	*token;
 
 	token = tokens->content;
 	if (token->type == TK_PIPE)
 	{
+		sh->last_status = 2;
 		free_token_lst(tokens);
 		ft_putstr_fd(PIPE_ERR_2, STDERR_FILENO);
 		return(1);
@@ -86,15 +87,14 @@ int	to_next_pipe(t_list **tks, t_cmd **cmd)
 
 	free_cmd(*cmd);
 	*cmd = new_cmd();
-	token = (*tks)->content;
 	while(*tks)
 	{
+		token = (*tks)->content;
 		if (token->type == TK_PIPE)
 			return (1);
 		*tks = (*tks)->next;
-		token = (*tks)->content;
 	}
-	return (1);
+	return (0);
 }
 
 int	parse(char *line, t_shell *sh)
@@ -106,7 +106,7 @@ int	parse(char *line, t_shell *sh)
 	if (init_tokens(line, &tokens))
 		return (1);
 	head = tokens;
-	if (is_head_tk_pipe(head))
+	if (is_head_tk_pipe(head, sh))
 		return (1);
 	cmd = new_cmd();
 	while (tokens)

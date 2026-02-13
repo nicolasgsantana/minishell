@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 10:06:56 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/13 12:11:37 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/13 15:58:35 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		is_builtin(char *arg);
 void	handle_tk_word(t_cmd *cmd, t_token *tk, t_shell *sh);
 int		handle_tk_rd_out(t_cmd *cmd, t_shell *sh, t_list **tks, int ap);
 int		handle_tk_rd_in(t_cmd *cmd, t_shell *sh, t_list **tks);
-int		handle_tk_heredoc(t_cmd *cmd, t_list **tks);
+int		handle_tk_heredoc(t_cmd *cmd, t_list **tks, t_shell *sh);
 int		handle_tk_pipe(t_cmd **cmd, t_list **tks, t_shell *sh);
 t_cmd	*new_cmd(void);
 
