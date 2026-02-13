@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 02:12:19 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/12 18:39:24 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/12 21:00:03 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,16 @@ char	*expand_var(char *line, t_shell *sh, int *i)
 	char	*value;
 
 	start = *i;
-	while ((line[*i]) && (ft_isalnum(line[*i]) || line[*i] == '_'))
+	(*i)++;
+	while (line[*i] && (ft_isalnum(line[*i]) || line[*i] == '_'
+			|| line[*i] == '?'))
 		(*i)++;
 	var = ft_substr(line, start, *i - start);
 	value = get_var(var, sh);
 	free(var);
 	if (!value)
 		return (ft_strdup(""));
+	printf("%s", value);
 	return (ft_strdup(value));
 }
 
