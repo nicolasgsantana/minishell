@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 10:06:56 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/13 15:58:35 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/13 19:34:31 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,7 @@ int		handle_tk_rd_in(t_cmd *cmd, t_shell *sh, t_list **tks);
 int		handle_tk_heredoc(t_cmd *cmd, t_list **tks, t_shell *sh);
 int		handle_tk_pipe(t_cmd **cmd, t_list **tks, t_shell *sh);
 t_cmd	*new_cmd(void);
+int		is_head_tk_pipe(t_list *tokens, t_shell *sh);
+int		to_next_pipe(t_list **tks, t_cmd **cmd);
 
 #endif
