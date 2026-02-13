@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 14:18:28 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/01/27 19:45:41 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/12 23:15:08 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	is_numeric(char *str)
 		i++;
 	while (str[i])
 	{
-		if (!ft_isdigit(str[i]))
+		if ((!ft_isdigit(str[i])) || (i > 17))
 			return (0);
 		i++;
 	}
