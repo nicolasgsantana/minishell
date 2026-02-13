@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 10:14:53 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/13 16:32:18 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/13 17:45:05 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,5 +125,6 @@ int	parse(char *line, t_shell *sh)
 	}
 	append_cmd(sh, cmd);
 	free_token_lst(head);
+	free(line);
 	return (0);
 }

@@ -6,7 +6,11 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 10:59:11 by nde-sant          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2026/02/13 17:51:49 by nde-sant         ###   ########.fr       */
+=======
+/*   Updated: 2026/02/13 17:45:10 by nde-sant         ###   ########.fr       */
+>>>>>>> a9907a7 (refactor(parser): move free line position)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +94,6 @@ int	main(int argc, char **argv, char **envp)
 				executor(sh);
 			reset_shell(sh);
 		}
-		free(line);
 	}
 	rl_clear_history();
 	return (0);
