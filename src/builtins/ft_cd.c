@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 10:30:06 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/10 17:50:38 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/12 22:57:30 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,11 @@ char	*check_cd_args(t_cmd *cmd, t_shell *sh, int *print_pwd)
 
 int	chdir_path(char *path)
 {
+	if (!path)
+		return (1);
 	if (chdir(path) == -1)
 	{
 		perror("cd");
-		free(path);
 		return (1);
 	}
 	return (0);
@@ -63,10 +64,11 @@ int	ft_cd(t_shell *sh, t_cmd *cmd)
 	if (!getcwd(oldpwd, sizeof(oldpwd)))
 		oldpwd[0] = '\0';
 	path = check_cd_args(cmd, sh, &print_pwd);
-	if (!path)
+	if (chdir_path(path))
+	{
+		free(path);
 		return (1);
-	if (chdir(path))
-		return (1);
+	}
 	update_env(sh->envp, "OLDPWD", oldpwd);
 	if (getcwd(cwd, sizeof(cwd)))
 	{
