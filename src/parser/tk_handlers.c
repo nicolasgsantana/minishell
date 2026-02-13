@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 20:09:03 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/13 15:54:28 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/13 19:36:00 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int	handle_tk_rd_in(t_cmd *cmd, t_shell *sh, t_list **tks)
 	{
 		*tks = (*tks)->next;
 		token = (*tks)->content;
-
 		path = expand(token, sh);
 		if (redir_in_check(path))
 		{
@@ -91,12 +90,12 @@ int	handle_tk_heredoc(t_cmd *cmd, t_list **tks, t_shell *sh)
 		if (token->expansion != EXP_NONE)
 		{
 			delim = strip_quotes(token->text);
-			cmd->hd_expand=1;
+			cmd->hd_expand = 1;
 		}
 		else
 		{
 			delim = ft_strdup(token->text);
-			cmd->hd_expand=0;
+			cmd->hd_expand = 0;
 		}
 		append_hd_delim(cmd, delim);
 		return (0);

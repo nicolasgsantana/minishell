@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 17:54:01 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/13 14:18:52 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/13 19:32:12 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	append_hd_delim(t_cmd *cmd, char *new_delim)
 	if (!cmd->hd_delim)
 		return ;
 	i = 0;
-	if(temp)
+	if (temp)
 	{
 		while (temp[i])
 		{
