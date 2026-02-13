@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 17:54:01 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/13 12:02:30 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/13 13:52:16 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	append_cmd(t_shell *sh, t_cmd *new_cmd)
 
 	temp = sh->cmds;
 	sh->cmd_count += 1;
-	sh->cmds = malloc(sizeof(t_cmd *) * sh->cmd_count + 1);
+	sh->cmds = malloc(sizeof(t_cmd *) * (sh->cmd_count + 1));
 	if (!sh->cmds)
 		return ;
 	i = 0;
