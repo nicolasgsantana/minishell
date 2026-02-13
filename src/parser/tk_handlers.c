@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 20:09:03 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/12 21:41:28 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/13 12:31:45 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	handle_tk_word(t_cmd *cmd, t_token *tk, t_shell *sh)
 	char	*arg;
 
 	arg = expand(tk, sh);
+	if (!arg)
+		return ;
 	if (!cmd->argv)
 		cmd->is_builtin = is_builtin(arg);
 	append_arg(cmd, arg);
@@ -104,7 +106,7 @@ int	handle_tk_pipe(t_cmd **cmd, t_list **tks, t_shell *sh)
 	t_token	*token;
 
 	token = (*tks)->next->content;
-	if (token->type != TK_EOF)
+	if (token->type != TK_EOF || token->type != TK_PIPE)
 	{
 		append_cmd(sh, *cmd);
 		*cmd = new_cmd();
