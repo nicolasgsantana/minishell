@@ -53,5 +53,6 @@ int		execute_builtin(t_shell *sh, t_cmd *cmd);
 int		apply_redir(t_cmd *cmd);
 char	**dup_env(char **envp);
 void	free_cmd(t_cmd *cmd);
+void	free_sh(t_shell *sh);
 
 #endif
