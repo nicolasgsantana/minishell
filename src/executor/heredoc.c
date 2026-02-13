@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 02:12:19 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/12 21:00:03 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/12 21:25:20 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ char	*expand_var(char *line, t_shell *sh, int *i)
 	free(var);
 	if (!value)
 		return (ft_strdup(""));
-	printf("%s", value);
 	return (ft_strdup(value));
 }
 
@@ -74,7 +73,7 @@ int	read_hd_lines(t_cmd *cmd, int fd, t_shell *sh, int index)
 			free(line);
 			break ;
 		}
-		if (cmd->hd_expand)
+		if (!cmd->hd_expand)
 		{
 			expanded = expand_line(line, sh);
 			free(line);
