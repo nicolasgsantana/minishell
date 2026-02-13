@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 10:59:11 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/13 19:02:48 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/13 19:39:23 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	reset_shell(t_shell *sh)
 	}
 	sh->cmds = NULL;
 	sh->cmd_count = 0;
+	rl_clear_history();
 }
 
 void	free_sh(t_shell *sh)
@@ -102,6 +103,5 @@ int	main(int argc, char **argv, char **envp)
 			reset_shell(sh);
 		}
 	}
-	rl_clear_history();
 	return (0);
 }
