@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 17:54:01 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/12 17:09:41 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/13 12:02:30 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	append_arg(t_cmd *cmd, char *new_arg)
 		temp[i] = ft_strdup(cmd->argv[i]);
 		i++;
 	}
-	temp[i++] = ft_strdup(new_arg);
+	temp[i++] = new_arg;
 	temp[i] = NULL;
 	free_argv(cmd->argv);
 	cmd->argv = temp;
