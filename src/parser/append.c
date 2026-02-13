@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 17:54:01 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/13 13:52:16 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/13 14:18:52 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	append_hd_delim(t_cmd *cmd, char *new_delim)
 
 	temp = cmd->hd_delim;
 	cmd->hd_count += 1;
-	cmd->hd_delim = malloc(sizeof(char *) * cmd->hd_count + 1);
+	cmd->hd_delim = malloc(sizeof(char *) * (cmd->hd_count + 1));
 	if (!cmd->hd_delim)
 		return ;
 	i = 0;
