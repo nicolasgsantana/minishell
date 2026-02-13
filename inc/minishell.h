@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:01:31 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/13 19:03:16 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/13 20:24:34 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ char	*make_env_var(char *key, char *value);
 int		execute_builtin(t_shell *sh, t_cmd *cmd);
 int		apply_redir(t_cmd *cmd);
 char	**dup_env(char **envp);
+void	sig_exit(t_shell *sh);
 void	close_all_fds_except_std(void);
 void	free_cmd(t_cmd *cmd);
 void	free_sh(t_shell *sh);

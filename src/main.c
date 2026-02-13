@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 10:59:11 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/13 20:07:24 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/13 20:24:40 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_shell	*init_shell(char **envp)
 	new_sh->cmd_count = 0;
 	new_sh->envp = dup_env(envp);
 	new_sh->last_status = 0;
-	return(new_sh);
+	return (new_sh);
 }
 
 void	free_cmd(t_cmd *cmd)
@@ -58,7 +58,7 @@ void	reset_shell(t_shell *sh)
 	i = 0;
 	if (cmds)
 	{
-		while(cmds[i])
+		while (cmds[i])
 			free_cmd(cmds[i++]);
 		free(cmds);
 	}
@@ -94,15 +94,11 @@ int	main(int argc, char **argv, char **envp)
 	{	
 		line = readline("minishell> ");
 		if (!line)
-		{
-			ft_putstr_fd("exit\n", 1);
-			free_sh(sh);
-			break ;
-		}
-		if (ft_strlen(line) > 0)
+			sig_exit(sh);
+		else if (ft_strlen(line) > 0)
 		{
 			add_history(line);
-			if(!parse(line, sh))
+			if (!parse(line, sh))
 				executor(sh);
 			reset_shell(sh);
 		}

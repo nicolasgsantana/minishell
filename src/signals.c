@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 18:11:08 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/13 18:11:49 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/13 20:24:47 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,11 @@ void	setup_signals_child(void)
 {
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
+}
+
+void	sig_exit(t_shell *sh)
+{
+	ft_putstr_fd("exit\n", 1);
+	free_sh(sh);
+	exit (0);
 }
