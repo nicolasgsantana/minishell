@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 10:14:53 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/13 13:03:43 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/13 15:38:30 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,16 +80,19 @@ int	is_head_tk_pipe(t_list *tokens)
 	return (0);
 }
 
-int	to_next_pipe(t_list **tks)
+int	to_next_pipe(t_list **tks, t_cmd **cmd)
 {
 	t_token	*token;
 
+	free_cmd(*cmd);
+	*cmd = new_cmd();
 	token = (*tks)->content;
 	while(*tks)
 	{
 		if (token->type == TK_PIPE)
 			return (1);
 		*tks = (*tks)->next;
+		token = (*tks)->content;
 	}
 	return (1);
 }
@@ -110,7 +113,7 @@ int	parse(char *line, t_shell *sh)
 	{
 		if (handle_tks(&cmd, sh, &tokens))
 		{
-			if (to_next_pipe(&tokens))
+			if (to_next_pipe(&tokens, &cmd))
 				continue ;
 			free_token_lst(head);
 			return (1);
