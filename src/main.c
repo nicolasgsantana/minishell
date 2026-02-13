@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 10:59:11 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/12 20:26:24 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/13 16:03:39 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,24 +93,4 @@ int	main(int argc, char **argv, char **envp)
 	}
 	rl_clear_history();
 	return (0);
-}
-// !!!DEBUG ONLY REMOVE LATER
-void	print_sh(t_shell *sh)
-{
-	ft_printf("CMDs:\n");
-	int i = 0;
-	if (sh->cmds)
-	{
-		while (sh->cmds[i])
-		{
-			int j = 0;
-			if (sh->cmds[i]->argv)
-			{
-				while (sh->cmds[i]->argv[j])
-					ft_printf("%s\n",sh->cmds[i]->argv[j++]);
-				i++;
-			}
-		}
-	}
-	ft_printf("\n\n");
 }
