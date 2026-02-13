@@ -95,5 +95,7 @@ void	execute_cmd(t_cmd *cmd, t_shell *sh)
 	}
 	execve(path, cmd->argv, sh->envp);
 	free(path);
-	exit(126);
+	ft_putstr_fd("minishell: ", 2);
+	perror(cmd->argv[0]);
+	exit(127);
 }
