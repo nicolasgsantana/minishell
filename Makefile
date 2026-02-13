@@ -87,4 +87,9 @@ fclean: clean
 
 re: fclean all
 
+valgrind: $(NAME)
+	@echo "\033[1;36m[VALGRIND]\033[0m Executando análise de memória...\n"
+	valgrind --suppressions=readline.sup --track-fds=yes \
+		--leak-check=full --show-leak-kinds=all ./$(NAME)
+
 .PHONY: all clean fclean re
