@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 20:09:03 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/12 21:05:58 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/12 21:41:28 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,7 @@ int	handle_tk_pipe(t_cmd **cmd, t_list **tks, t_shell *sh)
 {
 	t_token	*token;
 
-	*tks = (*tks)->next;
-	token = (*tks)->content;
+	token = (*tks)->next->content;
 	if (token->type != TK_EOF)
 	{
 		append_cmd(sh, *cmd);
