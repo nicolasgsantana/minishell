@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 10:30:06 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/01/27 19:45:35 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/12 22:14:21 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,17 @@ int	add_env(char ***envp, char *key, char *value)
 	i = 0;
 	while (i < len)
 	{
-		new_env[i] = (*envp)[i];
+		new_env[i] = ft_strdup((*envp)[i]);
 		i++;
 	}
 	new_env[i] = make_env_var(key, value);
 	new_env[i + 1] = NULL;
+	i = 0;
+	while ((*envp)[i])
+	{
+		free((*envp)[i]);
+		i++;
+	}
 	free(*envp);
 	*envp = new_env;
 	return (0);
