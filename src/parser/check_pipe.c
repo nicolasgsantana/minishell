@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 19:33:23 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/13 19:33:44 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/13 20:04:09 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	to_next_pipe(t_list **tks, t_cmd **cmd)
 
 	free_cmd(*cmd);
 	*cmd = NULL;
+	*tks = (*tks)->next;
 	while (*tks)
 	{
 		token = (*tks)->content;
