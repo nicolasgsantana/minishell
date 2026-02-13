@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 14:18:28 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/12 23:15:08 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/13 18:24:53 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,17 @@ int	ft_exit(t_shell *sh, t_cmd *cmd)
 
 	if (!cmd->argv[1])
 	{
+		nb = sh->last_status;
 		printf("exit\n");
-		exit(sh->last_status);
+		free_sh(sh);
+		exit(nb);
 	}
 	if (!is_numeric(cmd->argv[1]))
 	{
 		printf("exit\n");
 		printf("minishell: exit: %s: numeric argument required\n",
 			cmd->argv[1]);
+		free_sh(sh);
 		exit (2);
 	}
 	if (cmd->argv[2])
@@ -54,5 +57,6 @@ int	ft_exit(t_shell *sh, t_cmd *cmd)
 	}
 	nb = ft_atoi(cmd->argv[1]);
 	printf("exit\n");
+	free_sh(sh);
 	exit((unsigned char)nb);
 }
