@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:01:31 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/13 20:24:34 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/13 21:02:58 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # include "struct.h"
 # include "parser.h"
 
-extern volatile sig_atomic_t	g_received_signal;
+extern volatile sig_atomic_t	g_signal;
 
 int		prepare_heredocs(t_cmd *cmd, t_shell *sh);
 void	child_process(int i, t_shell *sh, int *pipes);
