@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 19:18:45 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/14 10:56:33 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/14 12:05:14 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void	executor(t_shell *sh)
 	int	i;
 
 	i = 0;
+	sh->last_status = 0;
 	while (i < sh->cmd_count)
 	{
 		if (sh->cmds[i]->hd_count > 0)
