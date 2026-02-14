@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 19:18:45 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/13 21:28:52 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/14 10:56:33 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ void	executor(t_shell *sh)
 	{
 		if (sh->cmds[i]->hd_count > 0)
 			sh->last_status = prepare_heredocs(sh->cmds[i], sh);
+		if (sh->last_status == 130)
+			return ;
 		i++;
 	}
 	if (sh->cmd_count == 1 && (sh->cmds[0])->is_builtin)

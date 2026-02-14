@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 02:12:19 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/13 22:28:01 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/14 11:14:49 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,16 @@ void handle_sigint_heredoc(int sig)
 {
 	(void)sig;
 	g_signal = SIGINT;
+	rl_done = 1;
 	write(STDOUT_FILENO, "\n", 1);
-	write(STDERR_FILENO, "DEBUG: SIGINT received\n", 23);
+	write(1, "minishell> ", 12);
 }
 
-void	setup_heredoc_signal(struct sigaction *old)
+void setup_heredoc_signal(struct sigaction *old)
 {
-	struct sigaction	new;
+	struct sigaction new;
 
+	ft_bzero(&new, sizeof(new));
 	new.sa_handler = handle_sigint_heredoc;
 	new.sa_flags = 0;
 	sigemptyset(&new.sa_mask);
@@ -40,7 +42,7 @@ void	restore_heredoc_signal(struct sigaction *old)
 void	warning_hd(t_cmd *cmd, int index)
 {
 	ft_putstr_fd(
-		"bash: warning: here-document at line 1 delimited by end-of-file (wanted `",
+		"minishell: warning: here-document at line 1 delimited by end-of-file (wanted `",
 		2);
 	ft_putstr_fd(cmd->hd_delim[index], 2);
 	ft_putstr_fd("')\n", 2);
@@ -93,8 +95,8 @@ char	*expand_line(char *line, t_shell *sh)
 
 int	read_hd_lines(t_cmd *cmd, int fd, t_shell *sh, int index)
 {
-	char			*line;
-	char			*expanded;
+	char		*line;
+	char		*expanded;
 	struct sigaction	old_sig;
 
 	setup_heredoc_signal(&old_sig);
@@ -109,6 +111,7 @@ int	read_hd_lines(t_cmd *cmd, int fd, t_shell *sh, int index)
 			g_signal = 0;
 			if (line)
 				free(line);
+			rl_done = 0;
 			rl_catch_signals = 1;
 			restore_heredoc_signal(&old_sig);
 			return (130);
