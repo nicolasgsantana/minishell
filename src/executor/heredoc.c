@@ -6,47 +6,11 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 02:12:19 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/14 11:14:49 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/14 12:28:21 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*SIGINT HEREDOC*/
-
-void handle_sigint_heredoc(int sig)
-{
-	(void)sig;
-	g_signal = SIGINT;
-	rl_done = 1;
-	write(STDOUT_FILENO, "\n", 1);
-	write(1, "minishell> ", 12);
-}
-
-void setup_heredoc_signal(struct sigaction *old)
-{
-	struct sigaction new;
-
-	ft_bzero(&new, sizeof(new));
-	new.sa_handler = handle_sigint_heredoc;
-	new.sa_flags = 0;
-	sigemptyset(&new.sa_mask);
-	sigaction(SIGINT, &new, old);
-}
-
-void	restore_heredoc_signal(struct sigaction *old)
-{
-	sigaction(SIGINT, old, NULL);
-}
-
-void	warning_hd(t_cmd *cmd, int index)
-{
-	ft_putstr_fd(
-		"minishell: warning: here-document at line 1 delimited by end-of-file (wanted `",
-		2);
-	ft_putstr_fd(cmd->hd_delim[index], 2);
-	ft_putstr_fd("')\n", 2);
-}
 
 char	*expand_var(char *line, t_shell *sh, int *i)
 {
@@ -95,31 +59,29 @@ char	*expand_line(char *line, t_shell *sh)
 
 int	read_hd_lines(t_cmd *cmd, int fd, t_shell *sh, int index)
 {
-	char		*line;
-	char		*expanded;
+	char				*line;
+	char				*expanded;
 	struct sigaction	old_sig;
 
 	setup_heredoc_signal(&old_sig);
 	rl_catch_signals = 0;
-
 	while (1)
 	{
 		line = readline("> ");
-
+		if (!line)
+		{
+			warning_hd(cmd, index);
+			break;
+		}
 		if (g_signal == SIGINT)
 		{
 			g_signal = 0;
 			if (line)
 				free(line);
-			rl_done = 0;
-			rl_catch_signals = 1;
+			rl_replace_line("", 0);
+			rl_on_new_line();
 			restore_heredoc_signal(&old_sig);
 			return (130);
-		}
-		if (!line)
-		{
-			warning_hd(cmd, index);
-			break;
 		}
 		else if (ft_strncmp(line, cmd->hd_delim[index],
 				ft_strlen(cmd->hd_delim[index]) + 1) == 0)
@@ -171,9 +133,7 @@ int	prepare_heredocs(t_cmd *cmd, t_shell *sh)
 		close(fd);
 		if (status == 130)
 		{
-			unlink(filename);
-			free(filename);
-			sh->last_status = 130;
+			clean_otz(filename);
 			return (130);
 		}
 		cmd->input_file = filename;

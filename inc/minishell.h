@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:01:31 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/13 21:02:58 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/14 12:25:51 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,9 @@ void	close_all_fds_except_std(void);
 void	free_cmd(t_cmd *cmd);
 void	free_sh(t_shell *sh);
 void	setup_signals(void);
+void	setup_heredoc_signal(struct sigaction *old);
+void	warning_hd(t_cmd *cmd, int index);
+void	restore_heredoc_signal(struct sigaction *old);
+void	clean_otz(char *filename);
 
 #endif
