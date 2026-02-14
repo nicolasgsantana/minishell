@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:01:31 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/14 12:25:51 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/14 13:11:55 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 
 extern volatile sig_atomic_t	g_signal;
 
+char	*hd_filename(int i);
+int		is_hd_delim(char *line, t_cmd *cmd, int index);
 int		prepare_heredocs(t_cmd *cmd, t_shell *sh);
 void	child_process(int i, t_shell *sh, int *pipes);
 int		wait_for_children(void);
@@ -58,6 +60,7 @@ void	close_all_fds_except_std(void);
 void	free_cmd(t_cmd *cmd);
 void	free_sh(t_shell *sh);
 void	setup_signals(void);
+int		hd_sigint(char *line, struct sigaction *old_sig);
 void	setup_heredoc_signal(struct sigaction *old);
 void	warning_hd(t_cmd *cmd, int index);
 void	restore_heredoc_signal(struct sigaction *old);

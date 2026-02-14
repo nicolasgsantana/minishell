@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 10:59:11 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/13 20:24:40 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/14 13:06:28 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	main(int argc, char **argv, char **envp)
 	sh = init_shell(envp);
 	line = "";
 	while (line)
-	{	
+	{
 		line = readline("minishell> ");
 		if (!line)
 			sig_exit(sh);

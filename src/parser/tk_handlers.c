@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tk_handlers.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 20:09:03 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/13 20:03:03 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/14 13:08:07 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	handle_tk_heredoc(t_cmd *cmd, t_list **tks, t_shell *sh)
 	t_token	*token;
 
 	if (next_is_word(*tks))
-	{	
+	{
 		*tks = (*tks)->next;
 		token = (*tks)->content;
 		if (token->expansion != EXP_NONE)

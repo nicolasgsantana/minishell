@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 02:12:19 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/14 12:28:21 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/14 13:11:35 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,24 @@ char	*expand_line(char *line, t_shell *sh)
 	return (result);
 }
 
+void	write_hd_line(int fd, char *line, t_cmd *cmd, t_shell *sh)
+{
+	char	*expanded;
+
+	if (!cmd->hd_expand)
+	{
+		expanded = expand_line(line, sh);
+		free(line);
+		line = expanded;
+	}
+	write(fd, line, ft_strlen(line));
+	write(fd, "\n", 1);
+	free(line);
+}
+
 int	read_hd_lines(t_cmd *cmd, int fd, t_shell *sh, int index)
 {
 	char				*line;
-	char				*expanded;
 	struct sigaction	old_sig;
 
 	setup_heredoc_signal(&old_sig);
@@ -68,51 +82,15 @@ int	read_hd_lines(t_cmd *cmd, int fd, t_shell *sh, int index)
 	while (1)
 	{
 		line = readline("> ");
-		if (!line)
-		{
-			warning_hd(cmd, index);
-			break;
-		}
 		if (g_signal == SIGINT)
-		{
-			g_signal = 0;
-			if (line)
-				free(line);
-			rl_replace_line("", 0);
-			rl_on_new_line();
-			restore_heredoc_signal(&old_sig);
-			return (130);
-		}
-		else if (ft_strncmp(line, cmd->hd_delim[index],
-				ft_strlen(cmd->hd_delim[index]) + 1) == 0)
-		{
-			free(line);
+			return (hd_sigint(line, &old_sig));
+		if (is_hd_delim(line, cmd, index))
 			break ;
-		}
-		else if (!cmd->hd_expand)
-		{
-			expanded = expand_line(line, sh);
-			free(line);
-			line = expanded;
-		}
-		write(fd, line, ft_strlen(line));
-		write(fd, "\n", 1);
-		free(line);
+		write_hd_line(fd, line, cmd, sh);
 	}
 	rl_catch_signals = 1;
 	restore_heredoc_signal(&old_sig);
 	return (0);
-}
-
-char	*hd_filename(int i)
-{
-	char	*num;
-	char	*tmp;
-
-	num = ft_itoa(i);
-	tmp = ft_strjoin("/tmp/.heredoc_", num);
-	free(num);
-	return (tmp);
 }
 
 int	prepare_heredocs(t_cmd *cmd, t_shell *sh)

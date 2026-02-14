@@ -28,6 +28,7 @@ SRC = $(addprefix src/, main.c \
 						executor/pipes.c \
 						executor/redir.c \
 						executor/heredoc.c \
+						executor/heredoc_utils.c \
 						executor/heredoc_sig.c \
 						builtins/dup_env.c \
 						builtins/env_utils.c \

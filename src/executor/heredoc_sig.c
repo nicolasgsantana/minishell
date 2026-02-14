@@ -6,13 +6,13 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/14 12:10:50 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/14 12:25:40 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/14 13:05:41 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void handle_sigint_heredoc(int sig)
+void	handle_sigint_heredoc(int sig)
 {
 	(void)sig;
 	g_signal = SIGINT;
@@ -23,7 +23,7 @@ void handle_sigint_heredoc(int sig)
 
 void	setup_heredoc_signal(struct sigaction *old)
 {
-	struct sigaction new;
+	struct sigaction	new;
 
 	ft_bzero(&new, sizeof(new));
 	new.sa_handler = handle_sigint_heredoc;
@@ -39,9 +39,8 @@ void	restore_heredoc_signal(struct sigaction *old)
 
 void	warning_hd(t_cmd *cmd, int index)
 {
-	ft_putstr_fd(
-		"minishell: warning: here-document at line 1 delimited by end-of-file (wanted `",
-		2);
+	ft_putstr_fd("minishell: warning: here-document at line 1 delimited ", 2);
+	ft_putstr_fd("by end-of-file (wanted `", 2);
 	ft_putstr_fd(cmd->hd_delim[index], 2);
 	ft_putstr_fd("')\n", 2);
 }

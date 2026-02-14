@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 14:14:55 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/13 14:16:03 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/14 13:14:31 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,4 @@ typedef struct s_shell
 	int		last_status;
 }	t_shell;
 
-# endif
+#endif
