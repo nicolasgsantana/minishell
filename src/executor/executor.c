@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 19:18:45 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/14 12:05:14 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/16 15:46:34 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,15 @@ void	executor(t_shell *sh)
 	if (sh->cmd_count == 1 && (sh->cmds[0])->is_builtin)
 		sh->last_status = builtin_redir(sh, sh->cmds[0]);
 	else
-		sh->last_status = execute_pipeline(sh);
+	{
+		i = 0;
+		while (i < sh->cmd_count)
+		{
+			if (!sh->cmds[i]->argv)
+				return ;
+			else
+				sh->last_status = execute_pipeline(sh);
+			i++;
+		}
+	}
 }
