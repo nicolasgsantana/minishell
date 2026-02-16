@@ -22,6 +22,7 @@ LIBS = $(LIBFT) -lreadline
 
 SRC = $(addprefix src/, main.c \
 						signals.c \
+						is_line_whitespace.c \
 						executor/exec_utils.c \
 						executor/execute_cmd.c \
 						executor/executor.c \

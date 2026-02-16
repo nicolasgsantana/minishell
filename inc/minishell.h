@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:01:31 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/14 13:11:55 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/16 14:08:57 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,6 @@ void	setup_heredoc_signal(struct sigaction *old);
 void	warning_hd(t_cmd *cmd, int index);
 void	restore_heredoc_signal(struct sigaction *old);
 void	clean_otz(char *filename);
+int		is_line_whitespace(char *line);
 
 #endif

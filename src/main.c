@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 10:59:11 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/14 13:06:28 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/16 14:11:34 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	main(int argc, char **argv, char **envp)
 		line = readline("minishell> ");
 		if (!line)
 			sig_exit(sh);
-		else if (ft_strlen(line) > 0)
+		else if (ft_strlen(line) > 0 && !is_line_whitespace(line))
 		{
 			add_history(line);
 			if (!parse(line, sh))
