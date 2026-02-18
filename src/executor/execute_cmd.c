@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 19:18:45 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/13 19:53:01 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/18 11:56:10 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ char	*join_path(char *dir, char *cmd)
 	return (full);
 }
 
-char	*get_env_path(char **envp)
+char	*get_env_path(char *cmd, char **envp, t_shell *sh)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	while (envp[i])
@@ -51,10 +51,14 @@ char	*get_env_path(char **envp)
 			return (envp[i] + 5);
 		i++;
 	}
-	return (NULL);
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(cmd, 2);
+	ft_putstr_fd(": No such file or directory\n", 2);	
+	free_sh(sh);
+	exit(127);
 }
 
-char	*find_path(char *cmd, char **envp)
+char	*find_path(char *cmd, char **envp, t_shell *sh)
 {
 	char	**dirs;
 	char	*full;
@@ -63,7 +67,7 @@ char	*find_path(char *cmd, char **envp)
 
 	if (ft_strchr(cmd, '/'))
 		return (ft_strdup(cmd));
-	path = get_env_path(envp);
+	path = get_env_path(cmd,envp, sh);
 	dirs = ft_split(path, ':');
 	i = 0;
 	while (dirs[i])
@@ -85,7 +89,7 @@ void	execute_cmd(t_cmd *cmd, t_shell *sh)
 {
 	char	*path;
 
-	path = find_path(cmd->argv[0], sh->envp);
+	path = find_path(cmd->argv[0], sh->envp, sh);
 	if (!path)
 	{
 		ft_putstr_fd("minishell: ", 2);
