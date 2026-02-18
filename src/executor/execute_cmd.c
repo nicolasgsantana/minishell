@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 19:18:45 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/18 11:56:10 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/18 11:58:53 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*get_env_path(char *cmd, char **envp, t_shell *sh)
 	}
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(cmd, 2);
-	ft_putstr_fd(": No such file or directory\n", 2);	
+	ft_putstr_fd(": No such file or directory\n", 2);
 	free_sh(sh);
 	exit(127);
 }
