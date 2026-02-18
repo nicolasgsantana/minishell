@@ -57,6 +57,10 @@ Referências utilizadas durante o desenvolvimento:
 - [Guia Minishell](https://medium.com/@laamirimarouane8/42-minishell-guide-53600f49742b);
 - [Documentação Open Group](https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html);
 - [Introduction to Systems Programming: a Hands-on Approach by Gustavo A. Junipero Rodriguez-Rivera and Justin Ennen - cap. 5](https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf);
+- [The Architecture of Open Source Applications (Volume 1) The Bourne-Again Shell](https://aosabook.org/en/v1/bash.html);
+- [Military Grade C/C++ Lexer from Scratch - Tsoding](https://youtu.be/AqyZztKlSGQ?si=cJEnBszUpOx-J1P2);
+- [The Bash Parser](https://mywiki.wooledge.org/BashParser);
+- [Bash Features Chapter 3.1.1](https://www.gnu.org/software/bash/manual/html_node/Shell-Operation.html);
 - A IA foi utilizada para:
   - Fazer testes isolados de algumas funcionalidades na execução de funções builtins e nativas;
   - Pesquisas rápidas de conceitos;

@@ -57,6 +57,10 @@ References used during development:
 - [Minishell Guide](https://medium.com/@laamirimarouane8/42-minishell-guide-53600f49742b);
 - [Open Group Documentation](https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html);
 - [Introduction to Systems Programming: a Hands-on Approach by Gustavo A. Junipero Rodriguez-Rivera and Justin Ennen - chap. 5](https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf);
+- [The Architecture of Open Source Applications (Volume 1) The Bourne-Again Shell](https://aosabook.org/en/v1/bash.html);
+- [Military Grade C/C++ Lexer from Scratch - Tsoding](https://youtu.be/AqyZztKlSGQ?si=cJEnBszUpOx-J1P2);
+- [The Bash Parser](https://mywiki.wooledge.org/BashParser);
+- [Bash Features Capítulo 3.1.1](https://www.gnu.org/software/bash/manual/html_node/Shell-Operation.html);
 - AI was used to:
   - Perform isolated tests of some functionalities in the execution of built-in and native functions;
   - Quick searches for concepts;
