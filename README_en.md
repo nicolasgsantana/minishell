@@ -60,7 +60,7 @@ References used during development:
 - [The Architecture of Open Source Applications (Volume 1) The Bourne-Again Shell](https://aosabook.org/en/v1/bash.html);
 - [Military Grade C/C++ Lexer from Scratch - Tsoding](https://youtu.be/AqyZztKlSGQ?si=cJEnBszUpOx-J1P2);
 - [The Bash Parser](https://mywiki.wooledge.org/BashParser);
-- [Bash Features Capítulo 3.1.1](https://www.gnu.org/software/bash/manual/html_node/Shell-Operation.html);
+- [Bash Features Chapter 3.1.1](https://www.gnu.org/software/bash/manual/html_node/Shell-Operation.html);
 - AI was used to:
   - Perform isolated tests of some functionalities in the execution of built-in and native functions;
   - Quick searches for concepts;
