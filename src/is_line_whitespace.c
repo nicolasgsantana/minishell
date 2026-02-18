@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 13:44:33 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/16 14:08:39 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/18 11:00:55 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@ int	is_line_whitespace(char *line)
 	while (line[i])
 		if (!ft_isspace(line[i++]))
 			return (0);
+	free(line);
 	return (1);
 }
