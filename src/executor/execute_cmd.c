@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 19:18:45 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/18 11:58:53 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/18 12:06:53 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	*find_path(char *cmd, char **envp, t_shell *sh)
 
 	if (ft_strchr(cmd, '/'))
 		return (ft_strdup(cmd));
-	path = get_env_path(cmd,envp, sh);
+	path = get_env_path(cmd, envp, sh);
 	dirs = ft_split(path, ':');
 	i = 0;
 	while (dirs[i])
