@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 13:54:25 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/01/21 14:21:13 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/19 20:27:37 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	consume_char(t_lexer *lexer, size_t *len)
 
 static int	is_valid_char(char c)
 {
-	return (!ft_isspace(c) && c);
+	return ((!ft_isspace(c) && c) && !starts_with_operator(c));
 }
 
 t_token	*handle_word(t_lexer *lexer)
