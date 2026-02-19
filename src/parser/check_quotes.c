@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 13:52:21 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/01/29 09:46:16 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/19 16:23:42 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,28 @@ static int	quote_count(t_token *token)
 	return (count);
 }
 
+static int	check_qt_exp_none(t_token *token)
+{
+	int	squotes;
+	int	dquotes;
+	int	i;
+
+	squotes = 0;
+	dquotes = 0;
+	i = 0;
+	while (token->text[i])
+	{
+		if (token->text[i] == '\'')
+			squotes++;
+		else if (token->text[i] == '"')
+			dquotes++;
+		i++;
+	}
+	if (squotes % 2 || dquotes % 2)
+		return (1);
+	return (0);
+}
+
 int	check_quotes(t_list	*tokens)
 {
 	t_token	*token;
@@ -39,9 +61,17 @@ int	check_quotes(t_list	*tokens)
 	while (tokens)
 	{
 		token = tokens->content;
-		if (token->expansion != EXP_NONE)
+		if (token->expansion != EXP_NONE && token->type == TK_WORD)
 		{
 			if (quote_count(token) != 2)
+			{
+				ft_putstr_fd(QT_ERR, STDERR_FILENO);
+				return (1);
+			}
+		}
+		else if (token->type == TK_WORD)
+		{
+			if (check_qt_exp_none(token))
 			{
 				ft_putstr_fd(QT_ERR, STDERR_FILENO);
 				return (1);

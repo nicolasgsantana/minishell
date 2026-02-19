@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 10:06:56 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/18 12:40:44 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/19 19:05:34 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ char	*get_var(char *text, t_shell *sh);
 char	*get_var_name(char *text);
 char	*strip_quotes(char *text);
 char	*expand(t_token *token, t_shell *sh);
-char	*expand_var_in_string(char *str, t_shell *sh);
 int		valid_var_start(char *text);
 int		valid_name_char(char c);
 int		is_status(char *text);
@@ -49,5 +48,6 @@ t_cmd	*new_cmd(void);
 int		is_head_tk_pipe(t_list *tokens, t_shell *sh);
 int		to_next_pipe(t_list **tks, t_cmd **cmd);
 int		get_argc(char **argv);
+char	*join_var(char	*str, char *result, int *i, t_shell *sh);
 
 #endif
