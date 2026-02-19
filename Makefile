@@ -38,6 +38,7 @@ SRC = $(addprefix src/, main.c \
 						builtins/ft_env.c \
 						builtins/ft_exit.c \
 						builtins/ft_export.c \
+						builtins/export_utils.c \
 						builtins/ft_pwd.c \
 						builtins/ft_unset.c \
 						lexer/lexer.c \
