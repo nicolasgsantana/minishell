@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 19:37:55 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/19 13:46:54 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/19 14:12:32 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,6 @@ int	wait_for_children(void)
 				ft_putstr_fd("Quit (core dumped)\n", STDOUT_FILENO);
 		}
 	}
+	g_signal = 0;
 	return (last_status);
 }

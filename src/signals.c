@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 18:11:08 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/19 13:52:16 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/19 14:31:25 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,16 @@ volatile sig_atomic_t	g_signal = 0;
 void	handle_sigint(int sig)
 {
 	(void)sig;
+	if (g_signal == -1)
+	{
+		g_signal = SIGINT;
+		write(STDOUT_FILENO, "\n", 1);
+		return ;
+	}
 	g_signal = SIGINT;
 	write(STDOUT_FILENO, "\n", 1);
 	rl_on_new_line();
+	rl_replace_line("", 0);
 	rl_redisplay();
 }
 

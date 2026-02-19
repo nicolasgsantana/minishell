@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 19:18:45 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/19 12:43:23 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/19 14:12:06 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	execute_pipeline(t_shell *sh)
 
 	pipes = create_pipes(sh->cmd_count);
 	i = 0;
+	g_signal = -1;
 	while (i < sh->cmd_count)
 	{
 		pid = fork();

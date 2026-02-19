@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:01:31 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/16 14:08:57 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/19 13:17:39 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	close_all_fds_except_std(void);
 void	free_cmd(t_cmd *cmd);
 void	free_sh(t_shell *sh);
 void	setup_signals(void);
+void	setup_signals_child(void);
 int		hd_sigint(char *line, struct sigaction *old_sig);
 void	setup_heredoc_signal(struct sigaction *old);
 void	warning_hd(t_cmd *cmd, int index);

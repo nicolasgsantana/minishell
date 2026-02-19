@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 10:59:11 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/16 14:11:34 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/19 14:19:49 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,19 +89,19 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	setup_signals();
 	sh = init_shell(envp);
-	line = "";
-	while (line)
+	while (1)
 	{
 		line = readline("minishell> ");
 		if (!line)
 			sig_exit(sh);
-		else if (ft_strlen(line) > 0 && !is_line_whitespace(line))
+		if (ft_strlen(line) > 0 && !is_line_whitespace(line))
 		{
 			add_history(line);
 			if (!parse(line, sh))
 				executor(sh);
 			reset_shell(sh);
 		}
+		g_signal = 0;
 	}
 	return (0);
 }
