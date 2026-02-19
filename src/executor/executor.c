@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 19:18:45 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/16 16:11:46 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/19 12:43:23 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,7 @@ void	executor(t_shell *sh)
 		{
 			if (!sh->cmds[i++]->argv)
 				return ;
-			else
-				sh->last_status = execute_pipeline(sh);
 		}
+		sh->last_status = execute_pipeline(sh);
 	}
 }
