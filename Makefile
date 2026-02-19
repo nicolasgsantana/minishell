@@ -57,6 +57,8 @@ SRC = $(addprefix src/, main.c \
 						expansion/expansion.c \
 						expansion/get_var.c \
 						expansion/validation.c \
+						expansion/join_var.c \
+						expansion/strip_quotes.c \
 						)
 HEADER = inc/minishell.h
 
