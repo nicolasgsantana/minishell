@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 14:18:28 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/19 15:46:34 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/19 16:15:29 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,18 @@ int	ft_exit(t_shell *sh, t_cmd *cmd)
 	}
 	if (!is_numeric(cmd->argv[1]))
 	{
-		printf("exit\nminishell: exit: %s: numeric argument required",
-			cmd->argv[1]);
+		ft_putstr_fd("exit\nminishell: exit: ", 2);
+		ft_putstr_fd(cmd->argv[1], 2);
+		ft_putstr_fd(": numeric argument required", 2);
 		error_message_and_clean("\n", sh);
 		exit (2);
 	}
 	if (cmd->argv[2])
 	{
-		printf("exit\nminishell: exit: too many arguments\n");
+		ft_putstr_fd("exit\nminishell: exit: too many arguments\n", 2);
 		return (1);
 	}
 	nb = ft_atoi(cmd->argv[1]);
-	printf("exit\n");
+	ft_putstr_fd("exit\n", 1);
 	exit((unsigned char)nb);
 }
