@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 18:11:08 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/14 13:07:04 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/19 12:37:26 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	handle_sigint(int sig)
 {
 	(void)sig;
 	g_signal = SIGINT;
-	write(STDOUT_FILENO, "^C\n", 3);
+	write(STDOUT_FILENO, "\n", 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
