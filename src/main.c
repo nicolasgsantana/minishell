@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 10:59:11 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/19 14:19:49 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/19 14:36:35 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ int	main(int argc, char **argv, char **envp)
 				executor(sh);
 			reset_shell(sh);
 		}
-		g_signal = 0;
 	}
 	return (0);
 }

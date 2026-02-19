@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 10:30:06 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/12 22:14:21 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/19 15:22:16 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ int	ft_export(t_shell *sh, t_cmd *cmd)
 
 	if (!cmd->argv[1])
 	{
-		print_env(sh->envp);
+		sort_env(sh->envp);
+		print_export(sh->envp);
 		return (0);
 	}
 	i = 1;

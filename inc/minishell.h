@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:01:31 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/19 13:17:39 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/19 15:21:55 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int		ft_export(t_shell *sh, t_cmd *cmd);
 int		ft_pwd(void);
 int		ft_unset(t_shell *sh, t_cmd *cmd);
 void	print_env(char **envp);
+void	sort_env(char **envp);
+void	print_export(char **envp);
 int		find_env_index(char **envp, char *key);
 int		env_len(char **envp);
 int		is_valid_identifier(char *str);
