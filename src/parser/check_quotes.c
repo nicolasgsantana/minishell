@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 13:52:21 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/19 16:14:01 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/19 16:23:42 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	check_quotes(t_list	*tokens)
 	while (tokens)
 	{
 		token = tokens->content;
-		if (token->expansion != EXP_NONE)
+		if (token->expansion != EXP_NONE && token->type == TK_WORD)
 		{
 			if (quote_count(token) != 2)
 			{
@@ -69,7 +69,7 @@ int	check_quotes(t_list	*tokens)
 				return (1);
 			}
 		}
-		else if (token->type != TK_EOF)
+		else if (token->type == TK_WORD)
 		{
 			if (check_qt_exp_none(token))
 			{
