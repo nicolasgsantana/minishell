@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 10:30:06 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/19 15:22:16 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/19 15:42:27 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,9 @@ int	handle_export_arg(t_shell *sh, char *arg)
 
 	if (!is_valid_identifier(arg))
 	{
-		printf("export: %s: not a valid identifier\n", arg);
+		ft_putstr_fd("minishell: export: ", 2);
+		ft_putstr_fd(arg, 2);
+		ft_putstr_fd(": not a valid identifier\n", 2);
 		return (1);
 	}
 	equal = ft_strchr(arg, '=');

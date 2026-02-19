@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 14:18:28 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/13 20:31:30 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/19 15:46:34 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	error_message_and_clean(char *str, t_shell *sh)
 {
-	printf("%s", str);
+	ft_putstr_fd(str, STDERR_FILENO);
 	free_sh(sh);
 }
 

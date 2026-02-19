@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 10:30:06 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/18 12:41:04 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/19 15:44:55 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	ft_cd(t_shell *sh, t_cmd *cmd)
 	if (get_argc(cmd->argv) > 2)
 	{
 		ft_putstr_fd("minishell: cd: too many arguments\n", STDERR_FILENO);
-		return (0);
+		return (1);
 	}
 	if (!getcwd(oldpwd, sizeof(oldpwd)))
 		oldpwd[0] = '\0';
