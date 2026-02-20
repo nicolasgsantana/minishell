@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 10:59:11 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/20 12:05:21 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/20 12:19:40 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,9 @@ void	reset_shell(t_shell *sh)
 	i = 0;
 	if (cmds)
 	{
+		cleanup_hd(cmds[i]);
 		while (cmds[i])
-		{
-			if (cmds[i]->hd_count > 0)
-				cleanup_hd(cmds[i]);
 			free_cmd(cmds[i++]);
-		}
 		free(cmds);
 	}
 	sh->cmds = NULL;

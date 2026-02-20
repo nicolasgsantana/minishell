@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 02:12:19 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/14 13:11:35 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/20 12:26:13 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int	prepare_heredocs(t_cmd *cmd, t_shell *sh)
 			clean_otz(filename);
 			return (130);
 		}
-		cmd->input_file = filename;
+		change_input(cmd, filename);
 		i++;
 	}
 	return (0);
