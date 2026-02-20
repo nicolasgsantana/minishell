@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:01:31 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/19 15:21:55 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/20 09:06:28 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*hd_filename(int i);
 int		is_hd_delim(char *line, t_cmd *cmd, int index);
 int		prepare_heredocs(t_cmd *cmd, t_shell *sh);
 void	child_process(int i, t_shell *sh, int *pipes);
-int		wait_for_children(void);
+int		wait_for_children(int cmd_count);
 int		*create_pipes(int cmd_count);
 void	setup_pipes(int i, int cmd_count, int *pipes);
 void	close_all_pipes(int *pipes, int cmd_count);

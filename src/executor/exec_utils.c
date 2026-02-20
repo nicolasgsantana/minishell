@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 19:37:55 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/19 14:12:32 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/20 09:08:00 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	child_process(int i, t_shell *sh, int *pipes)
 	execute_cmd(sh->cmds[i], sh);
 }
 
-int	wait_for_children(void)
+int	wait_for_children(int cmd_count)
 {
 	int	status;
 	int	last_status;
@@ -40,7 +40,7 @@ int	wait_for_children(void)
 		else if (WIFSIGNALED(status))
 		{
 			last_status = 128 + WTERMSIG(status);
-			if (WTERMSIG(status) == SIGQUIT)
+			if (WTERMSIG(status) == SIGQUIT && cmd_count == 1)
 				ft_putstr_fd("Quit (core dumped)\n", STDOUT_FILENO);
 		}
 	}
