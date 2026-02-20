@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 18:11:08 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/19 14:31:25 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/20 09:43:21 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,5 @@ void	sig_exit(t_shell *sh)
 {
 	ft_putstr_fd("exit\n", 1);
 	free_sh(sh);
-	exit (131);
+	exit (0);
 }
