@@ -6,11 +6,17 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 15:15:46 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/19 19:10:58 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/20 15:37:49 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+
+static void	toggle_quote_status(int *index, int *flag)
+{
+	*flag = !*flag;
+	*index += 1;
+}
 
 static int	is_var_start(char *str, int i)
 {
@@ -31,42 +37,24 @@ static char	*join_next_char(char c, char *result)
 	return (new_result);
 }
 
-static char	*expand_dquoted(char *str, t_shell *sh)
-{
-	char	*result;
-	int		i;
-
-	result = NULL;
-	i = 0;
-	while (str[i])
-	{
-		if (is_var_start(str, i))
-			result = join_var(str, result, &i, sh);
-		else
-			result = join_next_char(str[i++], result);
-	}
-	return (result);
-}
-
-static char	*expand_nonquoted(char *str, t_shell *sh, int i)
+static char	*expand_word(char *str, t_shell *sh, int i)
 {
 	char	*result;
 	int		inside_squote;
+	int		inside_dquote;
 
 	result = NULL;
 	inside_squote = 0;
+	inside_dquote = 0;
 	while (str[i])
 	{
-		if (str[i] == '\'')
-		{
-			inside_squote = !inside_squote;
-			i++;
-		}
+		if (str[i] == '"' && !inside_squote)
+			toggle_quote_status(&i, &inside_dquote);
+		else if (str[i] == '\'' && !inside_dquote)
+			toggle_quote_status(&i, &inside_squote);
 		else if (!inside_squote)
 		{
-			if (str[i] == '"')
-				i++;
-			else if (is_var_start(str, i))
+			if (is_var_start(str, i))
 				result = join_var(str, result, &i, sh);
 			else
 				result = join_next_char(str[i++], result);
@@ -79,17 +67,5 @@ static char	*expand_nonquoted(char *str, t_shell *sh, int i)
 
 char	*expand(t_token *token, t_shell *sh)
 {
-	char	*new_text;
-	char	*temp;
-
-	if (token->expansion == EXP_SQUOTED)
-		return (strip_quotes(token->text));
-	else if (token->expansion == EXP_DQUOTED)
-	{
-		temp = strip_quotes(token->text);
-		new_text = expand_dquoted(temp, sh);
-		free(temp);
-		return (new_text);
-	}
-	return (expand_nonquoted(token->text, sh, 0));
+	return (expand_word(token->text, sh, 0));
 }
