@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:01:31 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/20 12:26:39 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/20 15:47:37 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ extern volatile sig_atomic_t	g_signal;
 
 char	*hd_filename(int i);
 void	cleanup_hd(t_cmd *cmd);
-void    change_input(t_cmd *cmd, char *filename);
+void	change_input(t_cmd *cmd, char *filename);
 int		is_hd_delim(char *line, t_cmd *cmd, int index);
 int		prepare_heredocs(t_cmd *cmd, t_shell *sh);
 void	child_process(int i, t_shell *sh, int *pipes);

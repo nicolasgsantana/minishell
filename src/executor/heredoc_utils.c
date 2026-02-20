@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/14 13:09:07 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/20 12:26:22 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/20 15:46:55 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ int	is_hd_delim(char *line, t_cmd *cmd, int index)
 	return (0);
 }
 
-void change_input(t_cmd *cmd, char *filename)
+void	change_input(t_cmd *cmd, char *filename)
 {
 	if (cmd->input_file != NULL)
-			free(cmd->input_file);
+		free(cmd->input_file);
 	cmd->input_file = filename;
 }
