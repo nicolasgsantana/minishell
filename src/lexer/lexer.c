@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 10:04:33 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/01/21 16:43:27 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/20 14:49:03 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,10 @@ void	lexer_trim_left(t_lexer *lexer)
 
 t_token	*lexer_next(t_lexer *lexer)
 {
-	if (lexer->state == LX_DEFAULT)
-		lexer_trim_left(lexer);
-	if (lexer->line[lexer->cursor] == '\'')
-		lexer->state = LX_QUOTE;
-	else if (lexer->line[lexer->cursor] == '"')
-		lexer->state = LX_QUOTE;
-	if (lexer->state == LX_QUOTE)
-		return (handle_quote(lexer));
+	lexer_trim_left(lexer);
 	if (starts_with_operator(lexer->line[lexer->cursor]))
 		return (handle_operator(lexer));
-	if (lexer->line[lexer->cursor])
+	else if (lexer->line[lexer->cursor])
 		return (handle_word(lexer));
-	return (new_token(TK_EOF, NULL, 0, EXP_NONE));
+	return (new_token(TK_EOF, NULL, 0));
 }
