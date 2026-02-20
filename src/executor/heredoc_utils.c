@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/14 13:09:07 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/14 13:12:30 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/20 12:06:01 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*hd_filename(int i)
 	char	*tmp;
 
 	num = ft_itoa(i);
-	tmp = ft_strjoin("/tmp/.heredoc_", num);
+	tmp = ft_strjoin(".heredoc_", num);
 	free(num);
 	return (tmp);
 }

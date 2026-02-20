@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 14:31:31 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/10 14:32:14 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/20 12:06:06 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	cleanup_hd(t_cmd *cmd)
 	while (i < cmd->hd_count)
 	{
 		num = ft_itoa(i);
-		filename = ft_strjoin("/tmp/.heredoc_", num);
+		filename = ft_strjoin(".heredoc_", num);
 		free(num);
 		unlink(filename);
 		free(filename);
