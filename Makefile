@@ -14,9 +14,7 @@ LIBFT_DIR= lib/libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 CC = gcc
-### REMOVE -g flag before sending project
-### -g flag for DEBUG ONLY
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
 INCLUDES = -I$(INC_DIR) -I$(LIBFT_DIR)/inc
 LIBS = $(LIBFT) -lreadline
 
