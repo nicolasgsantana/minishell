@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 19:37:55 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/02/20 09:08:00 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/02/20 12:48:10 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,11 @@ int	wait_for_children(int cmd_count)
 			last_status = WEXITSTATUS(status);
 		else if (WIFSIGNALED(status))
 		{
-			last_status = 128 + WTERMSIG(status);
 			if (WTERMSIG(status) == SIGQUIT && cmd_count == 1)
+			{
 				ft_putstr_fd("Quit (core dumped)\n", STDOUT_FILENO);
+				last_status = 128 + WTERMSIG(status);
+			}
 		}
 	}
 	g_signal = 0;
