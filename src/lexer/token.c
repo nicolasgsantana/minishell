@@ -6,13 +6,13 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 13:50:04 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/01/21 16:23:53 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/20 14:34:26 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-t_token	*new_token(t_tk_type type, char *ref, size_t txt_len, t_exp exp)
+t_token	*new_token(t_tk_type type, char *ref, size_t txt_len)
 {
 	t_token	*token;
 	char	*text;
@@ -29,7 +29,6 @@ t_token	*new_token(t_tk_type type, char *ref, size_t txt_len, t_exp exp)
 		text = NULL;
 	token->type = type;
 	token->text = text;
-	token->expansion = exp;
 	return (token);
 }
 

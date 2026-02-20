@@ -6,7 +6,7 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 10:47:26 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/01/21 16:19:23 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/20 14:34:50 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,14 @@ typedef enum e_tk_type
 typedef enum e_lx_state
 {
 	LX_DEFAULT = 0,
-	LX_QUOTE,
+	LX_DQUOTE,
+	LX_SQUOTE
 }	t_lx_state;
-
-typedef enum e_exp
-{
-	EXP_NONE = 0,
-	EXP_DQUOTED,
-	EXP_SQUOTED,
-}	t_exp;
 
 typedef struct s_token
 {
 	t_tk_type	type;
 	char		*text;
-	t_exp		expansion;
 }				t_token;
 
 typedef struct s_lexer
@@ -56,7 +49,7 @@ typedef struct s_lexer
 
 t_lexer	lexer_new(char *line);
 t_token	*lexer_next(t_lexer *lexer);
-t_token	*new_token(t_tk_type type, char *ref, size_t txt_len, t_exp exp);
+t_token	*new_token(t_tk_type type, char *ref, size_t txt_len);
 int		ft_isspace(int c);
 int		starts_with_operator(char c);
 t_token	*handle_operator(t_lexer *lexer);

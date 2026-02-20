@@ -6,50 +6,38 @@
 /*   By: nde-sant <nde-sant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 13:52:21 by nde-sant          #+#    #+#             */
-/*   Updated: 2026/02/19 16:23:42 by nde-sant         ###   ########.fr       */
+/*   Updated: 2026/02/20 15:32:15 by nde-sant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static int	quote_count(t_token *token)
+static void	toggle_quote_status(int *quote_count, int *flag)
 {
-	int	count;
-	int	i;
-
-	count = 0;
-	i = 0;
-	while (token->text[i])
-	{
-		if (token->expansion == EXP_DQUOTED)
-			if (token->text[i] == '"')
-				count++;
-		if (token->expansion == EXP_SQUOTED)
-			if (token->text[i] == '\'')
-				count++;
-		i++;
-	}
-	return (count);
+	*flag = !*flag;
+	*quote_count += 1;
 }
 
-static int	check_qt_exp_none(t_token *token)
+static int	check_qt_count(t_token *token)
 {
-	int	squotes;
-	int	dquotes;
+	int	quote_count;
 	int	i;
+	int	inside_dquote;
+	int	inside_squote;
 
-	squotes = 0;
-	dquotes = 0;
+	quote_count = 0;
+	inside_dquote = 0;
+	inside_squote = 0;
 	i = 0;
 	while (token->text[i])
 	{
-		if (token->text[i] == '\'')
-			squotes++;
-		else if (token->text[i] == '"')
-			dquotes++;
+		if (token->text[i] == '\'' && !inside_dquote)
+			toggle_quote_status(&quote_count, &inside_squote);
+		else if (token->text[i] == '"' && !inside_squote)
+			toggle_quote_status(&quote_count, &inside_dquote);
 		i++;
 	}
-	if (squotes % 2 || dquotes % 2)
+	if (quote_count % 2)
 		return (1);
 	return (0);
 }
@@ -61,17 +49,9 @@ int	check_quotes(t_list	*tokens)
 	while (tokens)
 	{
 		token = tokens->content;
-		if (token->expansion != EXP_NONE && token->type == TK_WORD)
+		if (token->type == TK_WORD)
 		{
-			if (quote_count(token) != 2)
-			{
-				ft_putstr_fd(QT_ERR, STDERR_FILENO);
-				return (1);
-			}
-		}
-		else if (token->type == TK_WORD)
-		{
-			if (check_qt_exp_none(token))
+			if (check_qt_count(token))
 			{
 				ft_putstr_fd(QT_ERR, STDERR_FILENO);
 				return (1);
